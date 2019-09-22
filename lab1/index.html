@@ -3,181 +3,197 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="table_v.21.css">
+    <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="style.css" rel="stylesheet">
+    <link href="table.css" rel="stylesheet">
 
     <title>Первая лабка</title>
 </head>
 
 <body>
-    <script src="jquery-3.4.1.js"></script>
-    <script>
-        const checkElement = function (elemAddress) {
-            let elem = $(elemAddress);
-            if (elem.val().replace(",", ".") !== "-") {
-                // if (typeof elem.val().replace(",", ".") !== 'undefined') {
-                    let value = Number(elem.val().replace(",", "."));
-                    if (elemAddress[1] === 'x') {
-                        if (!($.isNumeric(elem.val().replace(",", ".")) || elem.val().replace(",", ".") === "-" || elem.val().replace(",", ".") === ""))
-                            document.getElementById("x-value-select").value = elem.val().slice(0, elem.val().length - 1);
+<script src="jquery-3.4.1.js"></script>
+<script>
+    window.onload = function () {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: 'php/history.php',
+            success: data => document.querySelector('#ans').innerHTML = data,
+        });
+    };
 
-                        if (value <= -5
-                            || value >= 5
-                            || isNaN(value)
-                            || /[\s]+/.test(elem.val())
-                            || elem.val() === "undefined"
-                        ||elem.val() === "") {
-                            $(elem).removeClass().addClass("is-invalid");
-                            return false;
-                        }
-                    }
-                    if (elemAddress[1] === 'y') {
-                        if (!($.isNumeric(elem.val().replace(",", ".")) || elem.val().replace(",", ".") === "-" || elem.val().replace(",", ".") === ""))
-                            document.getElementById("y-value-select").value = elem.val().slice(0, elem.val().length - 1);
-                        if (value <= -3 || value >= 5 || isNaN(value) || /[\s]+/.test(elem
-                            .val()) || elem.val() === "") {
-                            $(elem).removeClass().addClass("is-invalid");
-                            return false;
-                        }
-                    }
-                    document.querySelector('#error-log').textContent = " ";
-                    elem.removeClass().addClass("is-valid");
-                    return true;
+    const checkElement = function (elemAddress) {
+        let elem = $(elemAddress);
+        if (elem.val().replace(",", ".") !== "-") {
+            let value = Number(elem.val().replace(",", "."));
+            if (elemAddress[1] === 'x') {
+                if (!($.isNumeric(elem.val().replace(",", ".")) || elem.val().replace(",", ".") === "-" || elem
+                    .val().replace(",", ".") === ""))
+                    document.getElementById("x-value-select").value = elem.val().slice(0, elem.val().length -
+                        1);
+
+                if (value <= -5 || value >= 5 || isNaN(value) || /[\s]+/.test(elem.val()) || elem.val() ===
+                    "undefined" || elem.val() === "") {
+                    $(elem).removeClass().addClass("is-invalid");
+                    return false;
                 }
-            // }
-        };
-
-        let onYInpChange = function () {
-
-            if (!checkElement("#x-value-select")) {
-                // incorrect
-            } else {
-                // correct.jpg;
             }
-            if (!checkElement("#y-value-select")) {
-                // incorrect.jpg
-            } else {
-                // correct.jpg
+            if (elemAddress[1] === 'y') {
+                if (!($.isNumeric(elem.val().replace(",", ".")) || elem.val().replace(",", ".") === "-" || elem
+                    .val().replace(",", ".") === ""))
+                    document.getElementById("y-value-select").value = elem.val().slice(0, elem.val().length -
+                        1);
+                if (value <= -3 || value >= 5 || isNaN(value) || /[\s]+/.test(elem
+                    .val()) || elem.val() === "") {
+                    $(elem).removeClass().addClass("is-invalid");
+                    return false;
+                }
             }
+            document.querySelector('#error-log').textContent = " ";
+            elem.removeClass().addClass("is-valid");
+            return true;
+        }
+    };
 
-        };
-        const submit = async function (e) {
+    let onYInpChange = function () {
+        if (!checkElement("#x-value-select")) {
+            // incorrect
+        } else {
+            // correct.jpg;
+        }
+        if (!checkElement("#y-value-select")) {
+            // incorrect.jpg
+        } else {
+            // correct.jpg
+        }
+    };
+
+    const submit = function (e) {
+        e.preventDefault();
+        if (!checkElement("#x-value-select")) {
+            checkElement("#y-value-select");
+            document.querySelector('#error-log').textContent =
+                "Значение X должно быть в диапазоне (-5;5)";
+            return;
+        } else if (!checkElement("#y-value-select")) {
+            document.querySelector('#error-log').textContent =
+                "Значение Y должно быть в диапазоне (-3;5)";
+            return;
+        } else if ($('input[name=r_value]:checked', '#form').val() === undefined) {
+            document.querySelector('#error-log').textContent =
+                "Выберите значение R!";
+            return;
+        }
+        $.ajax({
+            type: "GET",
+            url: "php/check.php",
+            data:
+                {
+                    x_value: $("#x-value-select").val(),
+                    y_value: $("#y-value-select").val(),
+                    r_value: $('input[name=r_value]:checked', '#form').val()
+                },
+            success: data => document.querySelector('#ans').innerHTML = data,
+            error: (jqXHR, textStatus, errorThrown) =>
+                document.querySelector('#error-log').innerHTML = "Ошибка HTTP: " + jqXHR.status + "(" + errorThrown + ")",
+            dataType: "html"
+        });
+    };
+
+    const clear = function (e) {
+        if (confirm('Вы уверены??')) {
             e.preventDefault();
-            if (!checkElement("#x-value-select")) {
-                checkElement("#y-value-select");
-                document.querySelector('#error-log').textContent =
-                    "Значение X должно быть в диапазоне [-5;5]";
-                return;
-            } else if (!checkElement("#y-value-select")) {
-                document.querySelector('#error-log').textContent =
-                    "Значение Y должно быть в диапазоне [-3;5]";
-                return;
-            }
-            const formData = new FormData(document.querySelector('#form'));
-            let response = await fetch('php/check.php', {
-                method: 'POST',
-                body: formData,
-            });
-            if (response.ok) {
-                document.querySelector('#ans').innerHTML = await response.text();
-            } else {
-                document.querySelector('#error-log').innerHTML = "Ошибка HTTP: " + response.status;
-            }
-        };
+            fetch('php/clear.php', {
+                method: 'GET',
+            })
+                .then(ans => ans.text())
+                .then(table => document.querySelector('#ans').innerHTML = table);
+        }
+    };
 
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelector('#submitButton').addEventListener('click', submit);
-        });
-
-        const clear = function (e) {
-            if (confirm('Вы уверены??')) {
-                e.preventDefault();
-                fetch('php/clear.php', {
-                    method: 'POST',
-                })
-                    .then(ans => ans.text())
-                    .then(table => document.querySelector('#ans').innerHTML = table);
-            }
-        };
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelector('#clearButton').addEventListener('click', clear);
-        });
-    </script>
-    <div class="wrapper">
-        <header>
-            <span>Вариант 210004</span>
-            <span class="student-info">Киселёв Сергей, P3110</span>
-        </header>
-        <div class="content">
-            <div class="img-form">
-                <div class="areas-img centered">
-                    <img src="img/areas.png" alt="тута график. Его надо смотреть.">
-                </div>
-                <form class="data-send-form" id="form" oninput="onYInpChange()">
-
-                    <div class="form-input">
-                        <div class="form-input-x"><label for="x-value-select"><strong>X: </strong></label>
-                            <input id="x-value-select" name="x_value" value="" type="text" placeholder="-5 ... 5" maxlength="17"/>
-                        </div>
-                        <div class="form-input-y"><label for="y-value-select"><strong>Y: </strong></label>
-                            <input id="y-value-select" name="y_value" value="" type="text" placeholder="-3 ... 5" maxlength="17"/>
-                        </div>
-                        <div class="radio-buttons centered" id="r_value_select">
-                            <p><strong>R: </strong></p>
-                            <p><label for="radio-button-1" class="radio-label">1</label>
-                                <input class="radio-input" id="radio-button-1" name="r_value" type="radio" value="1">
-                            </p>
-                            <p><label for="radio-button-2" class="radio-label">2</label>
-                                <input class="radio-input" id="radio-button-2" name="r_value" type="radio" value="2">
-                            </p>
-                            <p><label for="radio-button-3" class="radio-label">3</label>
-                                <input class="radio-input" id="radio-button-3" name="r_value" type="radio" value="3"
-                                    checked>
-                            </p>
-                            <p><label for="radio-button-4" class="radio-label">4</label>
-                                <input class="radio-input" id="radio-button-4" name="r_value" type="radio" value="4">
-                            </p>
-                            <p><label for="radio-button-5" class="radio-label">5</label>
-                                <input class="radio-input" id="radio-button-5" name="r_value" type="radio" value="5">
-                            </p>
-                        </div>
-                        <div class="form-buttons">
-                            <button class="check-button" type="submit" id="submitButton">Проверить</button>
-                            <button class="clear-button" type="button" id="clearButton">Очистить</button>
-                        </div>
-                        <div id="error-log" style="color: red"> </div>
-                    </div>
-                </form>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('#submitButton').addEventListener('click', submit);
+        document.querySelector('#clearButton').addEventListener('click', clear);
+    });
+</script>
+<div class="wrapper">
+    <header>
+        <span>Вариант 210004</span>
+        <span class="student-info">Киселёв Сергей, P3210</span>
+    </header>
+    <div class="content" id="content">
+        <div class="img-form">
+            <div class="areas-img centered">
+                <img alt="тута график. Его надо смотреть." src="img/areas.png">
             </div>
-            <div class="table-wrapper" style="overflow-x: auto;">
-                <div class="table">
-                    <div class="table-header" style="overflow-x: auto">
-                        <div class="header__item"><a id="x-table" class="filter__link" href="#">X</a></div>
-                        <div class="header__item"><a id="y-table" class="filter__link" href="#">Y</a></div>
-                        <div class="header__item"><a id="r-table" class="filter__link" href="#">R</a></div>
-                        <div class="header__item"><a id="result-table" class="filter__link" href="#">result</a></div>
-                        <div class="header__item"><a id="time-table" class="filter__link" href="#">Time</a></div>
-                        <div class="header__item"><a id="cr-time-table" class="filter__link" href="#">Benchmark</a></div>
-                    </div>
-                    <div class="table-content" id="ans">
+            <form class="data-send-form" id="form" oninput="onYInpChange()">
 
+                <div class="form-input">
+                    <div class="form-input-x"><label for="x-value-select"><strong>X: </strong></label>
+                        <input id="x-value-select" maxlength="15" name="x_value" placeholder="-5 ... 5" type="text"
+                               value=""/>
                     </div>
+                    <div class="form-input-y"><label for="y-value-select"><strong>Y: </strong></label>
+                        <input id="y-value-select" maxlength="15" name="y_value" placeholder="-3 ... 5" type="text"
+                               value=""/>
+                    </div>
+                    <div class="radio-buttons centered" id="r_value_select">
+                        <p><strong>R: </strong></p>
+                        <p><label class="radio-label" for="radio-button-1">1</label>
+                            <input class="radio-input" id="radio-button-1" name="r_value" type="radio" value="1">
+                        </p>
+                        <p><label class="radio-label" for="radio-button-2">2</label>
+                            <input class="radio-input" id="radio-button-2" name="r_value" type="radio" value="2">
+                        </p>
+                        <p><label class="radio-label" for="radio-button-3">3</label>
+                            <input checked class="radio-input" id="radio-button-3" name="r_value" type="radio"
+                                   value="3">
+                        </p>
+                        <p><label class="radio-label" for="radio-button-4">4</label>
+                            <input class="radio-input" id="radio-button-4" name="r_value" type="radio" value="4">
+                        </p>
+                        <p><label class="radio-label" for="radio-button-5">5</label>
+                            <input class="radio-input" id="radio-button-5" name="r_value" type="radio" value="5">
+                        </p>
+                    </div>
+                    <div class="form-buttons">
+                        <button class="check-button" id="submitButton" type="submit">Проверить</button>
+                        <button class="clear-button" id="clearButton" type="button">Очистить</button>
+                    </div>
+                    <div id="error-log" style="color: red"></div>
+                </div>
+            </form>
+        </div>
+        <div class="table-wrapper" style="overflow-x: auto;">
+            <div class="table">
+                <div class="table-header" style="overflow-x: auto">
+                    <div class="header__item"><a class="filter__link" id="x-table">X</a></div>
+                    <div class="header__item"><a class="filter__link" id="y-table">Y</a></div>
+                    <div class="header__item"><a class="filter__link" id="r-table">R</a></div>
+                    <div class="header__item"><a class="filter__link" id="result-table">result</a></div>
+                    <div class="header__item"><a class="filter__link" id="time-table">Time</a></div>
+                    <div class="header__item"><a class="filter__link" id="cr-time-table">Benchmark</a>
+                    </div>
+                </div>
+                <div class="table-content" id="ans">
+
                 </div>
             </div>
         </div>
-        <footer class="centered">
-            <span class="student-info-footer">&copy;kamikadze328, 2019</span>
-            <p class="student-footer-icon">
-                <a title="GitHub" href="https://github.com/kamikadze328">
-                    <img src="img/GitHubIcon.png" alt="ссылка на гит">
-                </a>
-            </p>
-        </footer>
     </div>
+    <footer class="centered">
+        <span class="student-info-footer">&copy;kamikadze328, 2019</span>
+        <p class="student-footer-icon">
+            <a href="https://github.com/kamikadze328" title="GitHub">
+                <img alt="ссылка на гит" src="img/GitHubIcon.png">
+            </a>
+        </p>
+    </footer>
+</div>
 </body>
 
 </html>

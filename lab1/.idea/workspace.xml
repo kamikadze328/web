@@ -13,12 +13,18 @@
       <executable />
     </execution>
   </component>
+  <component name="NamedScopeManager">
+    <scope name="Unnamed" pattern="file[lab1]:php/*||file:index.html||file:style_v.12.css||file:table_v.3.css" />
+  </component>
+  <component name="PhpDebugGeneral" break_at_first_line="true" zd_debug_port="9001" />
   <component name="PhpServers">
     <servers>
       <server host="localhost" id="0aca5726-00fb-44e6-9ead-dc9c2677bee8" name="Server" use_path_mappings="true" />
     </servers>
   </component>
+  <component name="PhpWebServerValidation" path_to_validation_script="C:\Apache24\htdocs\lab1" selected_validation_type="LOCAL" web_path_to_validation_script="http://localhost:/lab1" />
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="php_7.3.9" />
+  <component name="PhpXdebugProxy" ide_key="PHPSTORM" host="localhost" port="9000" />
   <component name="ProjectId" id="1Qvj28OL1YmJPpEWEWMhRBt6183" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -29,14 +35,18 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settings.php.debug.xdebug.proxy" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Apache24\htdocs\lab1\php" />
+      <recent name="C:\Apache24\htdocs\lab1" />
+      <recent name="D:\Banan\ITMO\2\web\lab1\php" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Apache24\htdocs\lab1" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Banan\ITMO\2\web\lab1\php" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -55,7 +65,7 @@
     <configuration default="true" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="Server" start_url="/lab1">
       <method v="2" />
     </configuration>
-    <configuration name="xDebug" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="Server" start_url="/lab1">
+    <configuration name="server" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="Server" start_url="/lab1">
       <method v="2" />
     </configuration>
   </component>
@@ -76,11 +86,24 @@
       <workItem from="1569044932029" duration="1277000" />
       <workItem from="1569046241928" duration="5284000" />
       <workItem from="1569053582300" duration="2724000" />
-      <workItem from="1569057922692" duration="1059000" />
+      <workItem from="1569057922692" duration="1001000" />
+      <workItem from="1569058979060" duration="1055000" />
+      <workItem from="1569158781713" duration="13930000" />
+      <workItem from="1569185980251" duration="3608000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$USER_HOME$/Desktop/info.php</url>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

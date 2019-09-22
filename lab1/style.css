@@ -12,6 +12,7 @@ body,
 .wrapper {
     display: flex;
     flex-direction: column;
+    min-height: 100%;
 }
 
 .content {
@@ -27,13 +28,14 @@ body,
     flex-direction: row;
     margin: 0 auto;
 }
-.is-valid{
+
+.is-valid {
     border-color: green;
     border-width: 2px;
     border-style: solid;
 }
 
-.is-invalid{
+.is-invalid {
     border-color: red;
 }
 
@@ -166,7 +168,7 @@ button {
 }
 
 footer {
-    flex: none;
+    flex: 0 0 auto;
     color: white;
     background-color: #9cd682;
 }
@@ -207,11 +209,6 @@ footer {
     .table-header {
         overflow-x: auto
     }
-
-    .form-inputs {
-        display: flex;
-        flex-direction: column;
-    }
 }
 
 @media (min-width:440px) {
@@ -241,21 +238,10 @@ footer {
     .table-header {
         overflow-x: auto;
     }
-
-    .form-inputs {
-        display: flex;
-        flex-direction: column;
-    }
 }
 
-@media (min-width:1110px) {
+@media (min-width:1150px) {
     .content {
-        flex-direction: row;
-    }
-
-    .form-inputs {
-        left: 0;
-        display: flex;
         flex-direction: row;
     }
 
