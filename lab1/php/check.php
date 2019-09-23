@@ -39,7 +39,6 @@ $result = array($x, $y, $r, $res, $currentTime, $time);
 
 if (!isset($_SESSION['history'])) {
     $_SESSION['history'] = array();
-
 }
 
 array_push($_SESSION['history'], $result);
