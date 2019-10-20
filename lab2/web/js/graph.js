@@ -50,16 +50,15 @@ function drawPoint(e) {
         const plot_context = plot_canvas.getContext("2d");
         plot_context.beginPath();
         plot_context.rect(point.x, point.y, 5, 5);
-        point.x = (point.x - 150) /100*r;
-        point.y = (-point.y + 150) /100*r;
-        alert(point.x + " " + point.y);
+        point.x = (point.x - 150)/100*r;
+        point.y = (-point.y + 150)/100*r;
         $.ajax({
             type: "POST",
             url: "test",
             data:
                 {
-                    x_value: point.x,
-                    y_value: point.y,
+                    x_value: point.x.toFixed(2),
+                    y_value: point.y.toFixed(2),
                     r_value: r
                 },
             success: data => {
@@ -91,7 +90,7 @@ function getCursorPosition(e) {
             document.documentElement.scrollTop;
     }
     return {
-        x: x - plot_canvas.offsetLeft,
-        y: y - plot_canvas.offsetTop
+        x: x - plot_canvas.getBoundingClientRect().left,
+        y: y - plot_canvas.getBoundingClientRect().top
     }
 }
