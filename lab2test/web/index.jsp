@@ -21,6 +21,8 @@
     <link href="styles/table.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/script.js" type="text/javascript"></script>
+    <script src="js/graph.js" type="text/javascript"></script>
+
 
     <title>Первая лабка</title>
 </head>
@@ -34,7 +36,9 @@
     <div class="content" id="content">
         <div class="img-form">
             <div class="areas-img centered">
-                <img alt="тута график. Его надо смотреть." src="img/areas.png">
+                <canvas id="plot" width="300" height="300">
+                </canvas>
+            <!--<img alt="тута график. Его надо смотреть." src="img/areas.png">-->
             </div>
             <form class="data-send-form" id="form" oninput="onYInpChange()">
 

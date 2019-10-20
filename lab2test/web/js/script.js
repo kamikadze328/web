@@ -1,12 +1,3 @@
-/*window.onload = function () {
-    $.ajax({
-        type: 'POST',
-        async: false,
-        url: 'test',
-        success: data => document.querySelector('#ans').innerHTML = data,
-});
-};*/
-
 const checkElement = function (elemAddress) {
     let elem = $(elemAddress);
     if (elem.val().replace(",", ".") !== "-") {
@@ -103,7 +94,7 @@ const clear = function (e) {
     }
 };
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', ()=> {
     document.querySelector('#submitButton').addEventListener('click', submit);
     document.querySelector('#clearButton').addEventListener('click', clear);
 });
