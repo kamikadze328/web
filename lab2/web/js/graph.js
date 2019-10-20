@@ -1,5 +1,5 @@
 
-$(document).ready(function() {
+const drawGraph=function() {
     const plot_canvas = document.getElementById("plot");
 
     const plot_context = plot_canvas.getContext("2d");
@@ -37,7 +37,9 @@ $(document).ready(function() {
     plot_context.moveTo(30, 150);
     plot_context.closePath();
     plot_context.stroke();
-});
+
+};
+//$(document).ready(drawGraph());
 
 function drawPoint(e) {
     const r = $('input[name=r_value]:checked', '#form').val();
@@ -54,7 +56,7 @@ function drawPoint(e) {
         point.y = (-point.y + 150)/100*r;
         $.ajax({
             type: "POST",
-            url: "test",
+            url: "controller",
             data:
                 {
                     x_value: point.x.toFixed(2),

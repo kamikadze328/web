@@ -62,7 +62,7 @@ const submit = function (e) {
     }
     $.ajax({
         type: "POST",
-        url: "test",
+        url: "controller",
         data:
             {
                 x_value: $("#x-value-select").val(),
@@ -81,11 +81,17 @@ const clear = function (e) {
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: "test",
+            url: "controller",
             data: {
                 type: "clear"
             },
-            success: data => document.querySelector('#ans').innerHTML = data,
+            success: data => {
+                document.querySelector('#ans').innerHTML = data;
+                const plot_canvas = document.getElementById("plot");
+                const context = plot_canvas.getContext('2d');
+                context.clearRect(0, 0, plot_canvas.width, plot_canvas.height);
+                drawGraph();
+            },
             error: (jqXHR, textStatus, errorThrown) =>
                 document.querySelector('#error-log').innerHTML = "Ошибка HTTP: " + jqXHR.status +
                     "(" + errorThrown + ")",

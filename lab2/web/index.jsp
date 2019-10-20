@@ -117,5 +117,7 @@
     </footer>
 </div>
 </body>
-
+<script type="text/javascript">
+    $(document).ready(drawGraph());
+</script>
 </html>
