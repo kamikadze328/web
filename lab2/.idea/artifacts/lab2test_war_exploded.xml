@@ -2,10 +2,10 @@
   <artifact type="exploded-war" name="lab2test:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/lab2test_war_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="lab2test/web/Web" />
+      <element id="javaee-facet-resources" facet="lab2/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="lab2test" />
+          <element id="module-output" name="lab2" />
         </element>
       </element>
     </root>

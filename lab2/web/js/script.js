@@ -95,6 +95,7 @@ const clear = function (e) {
 };
 
 document.addEventListener('DOMContentLoaded', ()=> {
+    document.getElementById("plot").addEventListener('click', drawPoint);
     document.querySelector('#submitButton').addEventListener('click', submit);
     document.querySelector('#clearButton').addEventListener('click', clear);
 });

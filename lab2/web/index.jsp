@@ -74,7 +74,7 @@
                         <button class="check-button" id="submitButton" type="submit">Проверить</button>
                         <button class="clear-button" id="clearButton" type="button">Очистить</button>
                     </div>
-                    <div id="error-log" style="color: red"></div>
+                    <div id="error-log"></div>
                 </div>
             </form>
         </div>

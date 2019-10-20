@@ -161,6 +161,9 @@ button {
 .form-buttons {
     margin: 3%
 }
+#error-log{
+    color: red
+}
 
 
 .student-footer-icon {
