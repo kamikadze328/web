@@ -1,5 +1,6 @@
 <%@ page import="servlet.Coordinate" %>
-<%@ page import="java.util.Vector" %><%--
+<%@ page import="java.util.Vector" %>
+<%--
   Created by IntelliJ IDEA.
   User: Банан
   Date: 15.10.2019
