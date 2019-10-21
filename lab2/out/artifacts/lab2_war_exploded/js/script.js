@@ -45,7 +45,7 @@ let onYInpChange = function () {
 
 const submit = function (e) {
     e.preventDefault();
-    if (!checkElement("#x-value-select")) {
+    /*if (!checkElement("#x-value-select")) {
         checkElement("#y-value-select");
         document.querySelector('#error-log').textContent =
             "Значение X должно быть в диапазоне (-5;5)";
@@ -58,7 +58,7 @@ const submit = function (e) {
         document.querySelector('#error-log').textContent =
             "Выберите значение R!";
         return;
-    }
+    }*/
     $.ajax({
         type: "POST",
         url: "controller",

@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 import java.util.Vector;
-import java.util.stream.IntStream;
+import java.util.stream.DoubleStream;
 
 public class AreaCheckServlet extends HttpServlet {
 
@@ -24,7 +24,7 @@ public class AreaCheckServlet extends HttpServlet {
         double y = Double.parseDouble(req.getParameter("y_value").replace(',', '.'));
         double r = Double.parseDouble(req.getParameter("r_value").replace(',', '.'));
         if (!checkArea(x, y, r)) {
-            //Отправить сообщение об ошибку
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } else {
             boolean correctCoordinate = false;
 
@@ -50,7 +50,6 @@ public class AreaCheckServlet extends HttpServlet {
             coordinatesCollection.add(coordinate);
             context.setAttribute("userData", coordinatesCollection);
 
-
             resp.setContentType("text/html;charset=UTF-8");
             PrintWriter writer = resp.getWriter();
             StringBuilder tableRow = new StringBuilder();
@@ -69,8 +68,8 @@ public class AreaCheckServlet extends HttpServlet {
     }
 
     private boolean checkArea(Double x, Double y, Double r) {
-        int[] a = {1, 2, 3, 4, 5};
-        return x > -5 && x < 5 && y > -3 && y < 5 && IntStream.of(a).anyMatch(rad -> rad == r);
+        double[] a = {1.0, 2.0, 3.0, 4.0, 5.0};
+        return x > -5.0 && x < 5.0 && y > -3.0 && y < 5.0 && DoubleStream.of(a).anyMatch(rad -> rad == r);
     }
 }
 
