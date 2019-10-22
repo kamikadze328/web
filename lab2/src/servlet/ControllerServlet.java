@@ -19,13 +19,13 @@ public class ControllerServlet extends HttpServlet {
         if (xString == null || yString == null || rString == null || isNotNumeric(xString.replace(',', '.'))
                 || isNotNumeric(yString.replace(',', '.')) || isNotNumeric(rString.replace(',', '.'))) {
             if (request.getParameter("type").equals("clear")) {
-                ServletContext context = request.getSession().getServletContext();
+                ServletContext context = getServletContext();
                 Object attribute = context.getAttribute("userData");
                 if (!(attribute == null || ((Vector<Coordinate>) attribute).size() == 0)) {
                     context.setAttribute("userData", new Vector<Coordinate>());
                 }
-            } else
-                request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+            } else{
+                request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);}
         } else {
             request.getServletContext().getRequestDispatcher("/checking").forward(request, response);
         }

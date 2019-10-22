@@ -3,26 +3,26 @@ const drawGraph=function() {
     const plot_canvas = document.getElementById("plot");
 
     const plot_context = plot_canvas.getContext("2d");
-
+    let canvWidth = plot_canvas.width;
     plot_context.beginPath();
-    plot_context.arc(150, 150, 50, 0, Math.PI / 2);
-    plot_context.lineTo(150, 150);
+    plot_context.arc(canvWidth/2, canvWidth/2, canvWidth/6, 0, Math.PI / 2);
+    plot_context.lineTo(canvWidth/2, canvWidth/2);
     plot_context.closePath();
-    plot_context.rect(100, 50, 50, 100);
+    plot_context.rect(canvWidth/3, canvWidth/6, canvWidth/6, canvWidth/3);
     plot_context.fillStyle = '#ff343b';
     plot_context.fill();
     plot_context.beginPath();
-    plot_context.moveTo(150, 150);
-    plot_context.lineTo(150, 250);
-    plot_context.lineTo(50, 150);
-    plot_context.lineTo(150, 150);
+    plot_context.moveTo(canvWidth/2, canvWidth/2);
+    plot_context.lineTo(canvWidth/2, canvWidth*5/6);
+    plot_context.lineTo(canvWidth/6, canvWidth/2);
+    plot_context.lineTo(canvWidth/2, canvWidth/2);
     plot_context.closePath();
     plot_context.fillStyle = '#ff343b';
     plot_context.fill();
     plot_context.beginPath();
 //Ox
-    plot_context.moveTo(30, 150);
-    plot_context.lineTo(270, 150);
+    plot_context.moveTo(canvWidth/10, canvWidth/2);
+    plot_context.lineTo(canvWidth*0.9, canvWidth/2);
     plot_context.lineTo(260, 140);
     plot_context.moveTo(270, 150);
     plot_context.lineTo(260, 160);

@@ -24,7 +24,6 @@
     <script src="js/script.js" type="text/javascript"></script>
     <script src="js/graph.js" type="text/javascript"></script>
 
-
     <title>Первая лабка</title>
 </head>
 
