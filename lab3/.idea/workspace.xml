@@ -6,57 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94bc7092-06af-4576-9a77-06ca113f0514" name="Default Changelist" comment="xhtml Готовы">
-      <change afterPath="$PROJECT_DIR$/.idea/$PRODUCT_WORKSPACE_FILE$" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/lab3_war_exploded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Bean_Validation.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/icefaces_ace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/ojdbc8.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/primefaces_6_1_sources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/cdi-api-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/cdi-api-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/cdi-api.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/javax.faces-2.2.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/primefaces-6.1-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/primefaces-6.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/WEB-INF/beans.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../lab1/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab1/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../lab1/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/lab2_war.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/lab2_war_exploded.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/templateLanguages.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="94bc7092-06af-4576-9a77-06ca113f0514" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/lab3.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war/lab2_war.war" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/img/GitHubIcon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/img/areas.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/img/emptyAreas.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/img/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/index.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/js/graph.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/js/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/styles/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/styles/table.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/servlet/AreaCheckServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/servlet/ControllerServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/servlet/Coordinate.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/img/GitHubIcon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/img/areas.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/img/emptyAreas.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/img/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/js/graph.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/js/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/styles/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/styles/table.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Лаба2.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/beans.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/beans.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -147,7 +99,6 @@
   <component name="RunManager">
     <configuration name="GlassFish 5.0.0" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 5.0.0" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/lab3_war_exploded/view/index.xhtml" />
-      <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="lab3:war exploded">
           <settings />
@@ -234,8 +185,16 @@
       <workItem from="1572689814257" duration="10241000" />
       <workItem from="1573051479925" duration="6280000" />
       <workItem from="1573070245777" duration="2417000" />
-      <workItem from="1573074582694" duration="1324000" />
+      <workItem from="1573074582694" duration="2881000" />
     </task>
+    <task id="LOCAL-00001" summary="xhtml Готовы">
+      <created>1573077277982</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1573077277982</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
