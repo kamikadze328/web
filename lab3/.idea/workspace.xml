@@ -2,23 +2,61 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="lab2:war exploded" />
+      <artifact name="lab3:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12e0afa7-1296-4ea0-b3af-6eb8a524a33f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/lab2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/lab2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/WEB-INF/classes/servlet/AreaCheckServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/WEB-INF/classes/servlet/AreaCheckServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/js/graph.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/js/graph.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/js/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/styles/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/servlet/AreaCheckServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab2/servlet/AreaCheckServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/servlet/AreaCheckServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/servlet/AreaCheckServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/js/graph.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/js/graph.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/js/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/styles/style.css" afterDir="false" />
+    <list default="true" id="94bc7092-06af-4576-9a77-06ca113f0514" name="Default Changelist" comment="xhtml Готовы">
+      <change afterPath="$PROJECT_DIR$/.idea/$PRODUCT_WORKSPACE_FILE$" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/lab3_war_exploded.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Bean_Validation.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/icefaces_ace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/ojdbc8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/primefaces_6_1_sources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/cdi-api-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/cdi-api-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/cdi-api.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javax.faces-2.2.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/primefaces-6.1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/primefaces-6.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/WEB-INF/beans.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../lab1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab1/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../lab1/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/lab2_war.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/lab2_war_exploded.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/templateLanguages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/lab3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war/lab2_war.war" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/img/GitHubIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/img/areas.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/img/emptyAreas.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/img/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/js/graph.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/js/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/styles/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab2_war_exploded/styles/table.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/servlet/AreaCheckServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/servlet/ControllerServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/servlet/Coordinate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/GitHubIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/areas.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/emptyAreas.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/img/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/js/graph.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/js/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/styles/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/styles/table.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Лаба2.docx" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,45 +64,45 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="jsf" />
-        <option value="Jsp File" />
-        <option value="JavaScript File" />
+        <option value="facelets" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="IgnoredFileRootStore">
-    <option name="generatedRoots">
-      <set>
-        <option value="D:\Banan\ITMO\2\web\lab2test\.idea" />
-      </set>
-    </option>
-  </component>
-  <component name="JsFlowSettings">
-    <service-enabled>true</service-enabled>
-    <exe-path />
-    <other-services-enabled>true</other-services-enabled>
-    <auto-save>true</auto-save>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/web/view/Facelets.xhtml" root0="SKIP_INSPECTION" />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
-    <option name="FILTER_INFO" value="false" />
-    <option name="FILTER_DEBUG" value="false" />
-    <option name="CUSTOM_FILTER" value="" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectId" id="1SFd0w9K00rDzeVLKFHkwvsAON3" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="1Sy2dhrVzzW4l5qarbNdZUDctwY" />
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="oracle" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -77,19 +115,21 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Banan\ITMO\2\lab3New\web\resourses\css" />
+      <recent name="D:\Banan\ITMO\2\lab3New\web\resourses\js" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Banan\ITMO\2\web\lab2test\web\img" />
+      <recent name="D:\Banan\ITMO\2\lab3New\web\resourses\img" />
+      <recent name="D:\Banan\ITMO\2\lab3New\web\resourses" />
+      <recent name="D:\Banan\ITMO\2\lab3New\web" />
+      <recent name="D:\Banan\ITMO\2\lab3New\web\view" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -105,11 +145,11 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="GlassFish 5.0.0" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 5.0.0" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/lab2_war_exploded/" />
+    <configuration name="GlassFish 5.0.0" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 5.0.0" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/lab3_war_exploded/view/index.xhtml" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="lab2:war exploded">
+        <artifact name="lab3:war exploded">
           <settings />
         </artifact>
       </deployment>
@@ -172,70 +212,9 @@
       </ConfigurationWrapper>
       <method v="2">
         <option name="Make" enabled="true" />
-        <option name="BuildArtifacts" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 5.0.0" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="UPDATING_POLICY" value="restart-server" />
-      <deployment />
-      <server-settings>
-        <option name="DOMAIN" value="" />
-        <option name="PRESERVE" value="false" />
-        <option name="COMPATIBILITY" value="false" />
-        <option name="VIRTUAL_SERVER" />
-        <option name="USERNAME" value="admin" />
-      </server-settings>
-      <predefined_log_file enabled="true" id="GlassFish" />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="9009" />
-      </RunnerSettings>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <method v="2">
-        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="lab3:war exploded" />
+        </option>
       </method>
     </configuration>
   </component>
@@ -244,67 +223,19 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="12e0afa7-1296-4ea0-b3af-6eb8a524a33f" name="Default Changelist" comment="" />
-      <created>1571163057721</created>
+      <changelist id="94bc7092-06af-4576-9a77-06ca113f0514" name="Default Changelist" comment="" />
+      <created>1572521603091</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1571163057721</updated>
-      <workItem from="1571163061508" duration="43628000" />
-      <workItem from="1571574294909" duration="1000" />
-      <workItem from="1571574316857" duration="4720000" />
-      <workItem from="1571579361768" duration="23431000" />
-      <workItem from="1572184841382" duration="12345000" />
+      <updated>1572521603091</updated>
+      <workItem from="1572521604896" duration="13479000" />
+      <workItem from="1572620636196" duration="339000" />
+      <workItem from="1572621067524" duration="20197000" />
+      <workItem from="1572689814257" duration="10241000" />
+      <workItem from="1573051479925" duration="6280000" />
+      <workItem from="1573070245777" duration="2417000" />
+      <workItem from="1573074582694" duration="1324000" />
     </task>
-    <task id="LOCAL-00001" summary="---">
-      <created>1571163739280</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1571163739280</updated>
-    </task>
-    <task id="LOCAL-00002" summary="backend completed">
-      <created>1571566122634</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1571566122634</updated>
-    </task>
-    <task id="LOCAL-00003" summary="canvas graph">
-      <created>1571573474857</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1571573474857</updated>
-    </task>
-    <task id="LOCAL-00004" summary="canvas graph">
-      <created>1571577067805</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1571577067806</updated>
-    </task>
-    <task id="LOCAL-00005" summary="lab2 completed">
-      <created>1571577502989</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1571577502989</updated>
-    </task>
-    <task id="LOCAL-00006" summary="lab2 completed">
-      <created>1571582850893</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1571582850893</updated>
-    </task>
-    <task id="LOCAL-00007" summary="lab2 completed">
-      <created>1571596797909</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1571596797910</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,20 +246,14 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="---" />
-    <MESSAGE value="backend completed" />
-    <MESSAGE value="canvas graph" />
-    <MESSAGE value="lab2 completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="lab2 completed" />
+    <MESSAGE value="xhtml Готовы" />
+    <option name="LAST_COMMIT_MESSAGE" value="xhtml Готовы" />
   </component>
 </project>

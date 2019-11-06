@@ -55,7 +55,7 @@ footer {
     float: right
 }
 
-header {
+.header {
     font-family: "Andale Mono", sans-serif;
     font-size: 20px;
     color: white;
