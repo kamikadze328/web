@@ -1,11 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
 <f:view>
-    <h:outputLabel value="Hello, world"/>
+    <h:head>
+        <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+            name="viewport" />
+        <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+
+        <h:outputStylesheet name="css/style.css" />
+        <h:outputStylesheet name="css/table.css" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
+        <h:outputScript name="js/graph.js" />
+        <h:outputScript name="js/script.js" />
+        <h:outputScript name="js/clock.js" />
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon.ico']}" />
+
+        <title>lab3</title>
+    </h:head>
+    <h:body>
+        <div class="wrapper">
+            <div class="header">
+                <span>Вариант 14778</span>
+                <span id="time"></span>
+                <span class="student-info">Лукьяненко, Киселёв. P3210</span>
+            </div>
+            <div class="content" id="content">
+                <div class="img-form">
+                    <h:form class="areas-img centered">
+                        <h:inputHidden id="canvaX" value=""/>
+                        <h:inputHidden id="canvaY" value=""/>
+                        <canvas id="plot" width="300" height="300">
+                            Canvas not supported
+                        </canvas>
+                        <p:remoteCommand name="canvaReady" action="#{pointForPage.addToList}" update=":tableResults"/>
+                    </h:form>
+                    <h:form name="form" method="post" class="data-send-form" id="form" oninput="onYInpChange()">
+                        <div class="form-input">
+                            <div class="form-input-x">
+                                <h:outputLabel>X:</h:outputLabel>
+                                <h:inputText value = "#{pointForPage.valueX}" id="x-value" maxlength="15" a:placeholder="-5 ... 5"
+                                    type="text" validatorMessage="Введите корректный X (от -5 до 5)">
+                                    <f:validateDoubleRange minimum="-5.0" maximum="5.0" for="x-value"/>
+                                    <h:outputText value="#{pointForPage.valueX}"/>
+                                    <f:ajax event="valueChange" execute="@this"/>
+                                </h:inputText>
+                            </div>
+                                    <ace:sliderEntry id="labelTextInput"
+                                                     label="Y:"
+                                                     labelPosition="left"
+                                                     showLabels="false"
+                                                     value="#{pointForPage.valueY}"
+                                                     min="-3"
+                                                     max="5"
+                                                     length="160px"
+                                                     style="margin-top: 0px">
+                                        <ace:ajax event="slideEnd" execute="@this"/>
+                                    </ace:sliderEntry>
+                                    <h:outputLabel style="text-align: left; margin: 0.6%;"> Y=
+                                        <h:outputText id="sliderValue" value="#{pointForPage.valueY}"/>
+                                    </h:outputLabel>
+                            <div class="select-one-menu" id="r_value_select">
+                                <h:outputLabel style="float: left">R: </h:outputLabel>
+                                <h:selectOneMenu value="#{pointForPage.valueR}" style="width:160px; float:right" widgetVar="r-value" onselect="drawGraph()">
+                                    <f:selectItem itemValue="1" itemLabel="1" />
+                                    <f:selectItem itemValue="2" itemLabel="2" />
+                                    <f:selectItem itemValue="3" itemLabel="3" />
+                                    <f:selectItem itemValue="4" itemLabel="4" />
+                                    <f:selectItem itemValue="5" itemLabel="5" />
+                                    <f:ajax event="valueChange" value="#{pointForPage.valueR}" />
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="form-buttons">
+                                <h:commandButton value="Проверить" action="#{pointForPage.addToList}" class="submit-button"/>
+                                <h:commandButton value="Очистить" action="#{pointForPage.clearList}" class="clear-button"/>
+                            </div>
+                            <h:message for="x-value" class="error-log"></h:message>
+                        </div>
+                    </h:form>
+                </div>
+                <div class="table-wrapper">
+
+                        <h:dataTable value="#{pointForPage.getPointsList()}" var="points"
+                                     styleClass="table"
+                                     headerClass="filter__link"
+                                     rowClasses="table-row"
+                                     id="tableResults"
+                        >
+                            <h:column>
+                                <f:facet name="header">X</f:facet>
+                                #{points.x}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Y</f:facet>
+                                #{points.y}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">R</f:facet>
+                                #{points.r}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Result/Answer</f:facet>
+                                #{points.answer}
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+            <div class="centered footer">
+                <span class="student-info-footer">&copy;kamikadze328, 2019</span>
+                <p class="student-footer-icon">
+                    <a href="https://github.com/kamikadze328" title="GitHub">
+                        <h:graphicImage name="img/GitHubIcon.png" />
+                    </a>
+                </p>
+            </div>
+        </div>
+    </h:body>
 </f:view>
+
 </html>
