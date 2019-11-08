@@ -6,68 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94bc7092-06af-4576-9a77-06ca113f0514" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/lab3_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/lab3_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Bean_Validation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Bean_Validation.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/icefaces_ace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/icefaces_ace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/ojdbc8.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/ojdbc8.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/primefaces_6_1_sources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/primefaces_6_1_sources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/lab3.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/cdi-api-javadoc.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/cdi-api-sources.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/cdi-api.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javax.faces-2.2.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/beans.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/classes/META-INF/lab3.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/classes/Point.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/classes/PointForPage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/classes/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/classes/css/table.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/classes/img/GitHubIcon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/classes/img/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/classes/js/clock.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/classes/js/graph.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/classes/js/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/faces-config.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/lib/icefaces-ace.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/lib/icefaces-mobi.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/lib/icefaces.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/lib/icepush.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/lib/javax.faces.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/lib/ojdbc8.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/lib/primefaces-6.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/resources/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/resources/css/table.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/resources/img/GitHubIcon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/resources/img/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/resources/js/clock.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/resources/js/graph.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/resources/js/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/view/Facelets.xhtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/view/index.xhtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/view/main.xhtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab3/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab3/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab3/js/clock.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab3/js/clock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab3/js/graph.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab3/js/graph.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab3/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab3/js/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Point.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PointForPage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/resources/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/resources/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/resources/js/clock.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/resources/js/clock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/resources/js/graph.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/resources/js/graph.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/resources/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/resources/js/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/view/Facelets.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/Facelets.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/view/main.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/main.xhtml" afterDir="false" />
-    </list>
+    <list default="true" id="94bc7092-06af-4576-9a77-06ca113f0514" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +45,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/web/view/Facelets.xhtml" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/web/view/main.xhtml" root0="SKIP_INSPECTION" />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -272,7 +211,7 @@
       <workItem from="1573074582694" duration="3083000" />
       <workItem from="1573146040284" duration="20080000" />
       <workItem from="1573231934266" duration="707000" />
-      <workItem from="1573234037803" duration="375000" />
+      <workItem from="1573234037803" duration="627000" />
     </task>
     <task id="LOCAL-00001" summary="xhtml Готовы">
       <created>1573077277982</created>
@@ -288,7 +227,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573078954055</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="xhtml Готовы">
+      <created>1573234652871</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1573234652872</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
