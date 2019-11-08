@@ -7,8 +7,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94bc7092-06af-4576-9a77-06ca113f0514" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Point.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/PointForPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/beans.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/beans.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/classes/StudentsBean.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/classes/css/table.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/WEB-INF/classes/css/table.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/resources/css/table.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/resources/css/table.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/view/Facelets.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/lab3_war_exploded/view/Facelets.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/lab3/StudentsBean.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/lab3/css/table.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab3/css/table.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StudentsBean.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/web/WEB-INF/beans.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/beans.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/resources/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/resources/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/resources/css/table.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/resources/css/table.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/resources/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/resources/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/Facelets.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/Facelets.xhtml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +44,30 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand />
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="SYSTEM: schema" type="3abd1b6a:OraImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="SYSTEM: schema" type="3abd1b6a:OraImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="SYSTEM: schema" type="3abd1b6a:OraImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="POINTS: table" type="942f455b:OraImplModel$Table" />
+      </path>
+    </expand>
     <select />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -58,7 +98,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../oracle_db_test" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -67,10 +107,10 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -169,6 +209,26 @@
       </method>
     </configuration>
   </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <treeState>
+          <expand>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@f2be3149" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@f2be3149" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@44d07587" type="9fbbdea:ServiceModel$ServiceNode" />
+            </path>
+          </expand>
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -185,7 +245,8 @@
       <workItem from="1572689814257" duration="10241000" />
       <workItem from="1573051479925" duration="6280000" />
       <workItem from="1573070245777" duration="2417000" />
-      <workItem from="1573074582694" duration="2881000" />
+      <workItem from="1573074582694" duration="3083000" />
+      <workItem from="1573146040284" duration="20080000" />
     </task>
     <task id="LOCAL-00001" summary="xhtml Готовы">
       <created>1573077277982</created>
@@ -194,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573077277982</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="xhtml Готовы">
+      <created>1573078954055</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1573078954055</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,7 +273,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
