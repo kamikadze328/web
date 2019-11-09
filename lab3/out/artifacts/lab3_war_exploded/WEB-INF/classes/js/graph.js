@@ -1,9 +1,9 @@
 
-const drawGraph=function() {
+function drawGraph() {
     const plot_canvas = document.querySelector("#plot");
-
     const context = plot_canvas.getContext("2d");
     let canvLength = plot_canvas.width;
+
     drawArea();
 
     context.beginPath();
@@ -39,40 +39,29 @@ const drawGraph=function() {
     context.fillText("1", canvLength*173/300, canvLength/2-canvLength*10/300);
     context.fillText("1", canvLength/2-canvLength*17/300, canvLength*127/300);
 
-};
+}
 
 function drawPoint(e) {
-    const r = PF('r-value').getSelectedValue();
-
+    const selector = document.getElementById('form:r_value');
+    const r = selector[selector.selectedIndex].value;
     const point = getCursorPosition(e);
     const plot_canvas = document.getElementById("plot");
     const plot_context = plot_canvas.getContext("2d");
     plot_context.beginPath();
     plot_context.rect(point.x, point.y, 5, 5);
-    point.x = (point.x - 150) / 100 * r;
-    point.y = (-point.y + 150) / 100 * r;
-    $.ajax({
-        type: "POST",
-        url: "controller",
-        data:
-            {
-                x_value: point.x.toFixed(2),
-                y_value: point.y.toFixed(2),
-                r_value: r
-            },
-        success: data => {
-            document.querySelector('#ans').innerHTML = data;
-            //В следующей лабе надо будет точки двух цветов ставить => нужна серверная валидация
-            plot_context.fillStyle = 'green';
-            plot_context.fill();
+    //console.log("x1: " + point.x.toFixed(2) +", "+ "y1: " + point.y.toFixed(2));
+    point.x = (point.x - 150)/28;
+    point.y = (-point.y + 150)/28;
+    //console.log("x2: " + point.x.toFixed(2) +", "+ "y2: " + point.y.toFixed(2));
+    document.getElementById('canvasForm:canvasX').value = point.x.toFixed(2);
+    document.getElementById('canvasForm:canvasY').value = point.y.toFixed(2);
+    document.getElementById("canvasForm:canvasSubmit").click();
+    // Need to send the point on a server
+}
 
-        },
-        error: (jqXHR, textStatus, errorThrown) =>
-            document.querySelector('#error-log').innerHTML = "Ошибка HTTP: " + jqXHR.status + "(" + errorThrown + ")",
-        //elem.insertAdjacentHTML("beforeend", "") - будет получше, если по одной строке/точке высылать
-        dataType: "html"
-    });
-
+function updateCanvasR() {
+    const selector = document.getElementById('form:r_value');
+    document.getElementById('canvasForm:canvasR').value = selector[selector.selectedIndex].value;
 }
 
 function getCursorPosition(e) {
@@ -93,30 +82,33 @@ function getCursorPosition(e) {
         y: y - plot_canvas.getBoundingClientRect().top
     }
 }
+function reDrawGraph() {
+    const plot_canvas = document.getElementById("plot");
+    const context = plot_canvas.getContext('2d');
+    context.clearRect(0, 0, plot_canvas.width, plot_canvas.height);
+    drawGraph();
+}
 
-function drawArea(){
+function drawArea() {
     const plot_canvas = document.getElementById("plot");
     const context = plot_canvas.getContext("2d");
     let canvLength = plot_canvas.width;
-    const r = $('input[name=r_value]:checked', '#form').val();
-    if (r === undefined) {
-        document.querySelector('#error-log').textContent =
-            "Выберите значение r!";
-    } else {
-        context.beginPath();
-        context.arc(canvLength/2, canvLength/2, canvLength*28*(r/2)/(300), 0, Math.PI / 2);
-        context.lineTo(canvLength / 2, canvLength / 2);
-        context.closePath();
-        context.rect(canvLength / 3, canvLength / 6, canvLength / 6, canvLength / 3);
-        context.fillStyle = '#ff343b';
-        context.fill();
-        context.beginPath();
-        context.moveTo(canvLength / 2, canvLength / 2);
-        context.lineTo(canvLength / 2, canvLength * 5 / 6);
-        context.lineTo(canvLength / 6, canvLength / 2);
-        context.lineTo(canvLength / 2, canvLength / 2);
-        context.closePath();
-        context.fillStyle = '#ff343b';
-        context.fill();
-    }
+    const selector = document.getElementById('form:r_value');
+    const r = selector[selector.selectedIndex].value;
+    context.beginPath();
+    context.arc(canvLength/2, canvLength/2, canvLength*28*(r/2)/300, 0, Math.PI/2);
+    context.lineTo(canvLength/2, canvLength/2);
+    context.closePath();
+    context.rect(canvLength/2 - canvLength*28*(r/2)/300,canvLength/2 - canvLength*28*r/300,canvLength*28*(r/2)/300, canvLength*28*r/300);
+    context.fillStyle = '#ff343b';
+    context.fill();
+    context.beginPath();
+    context.moveTo(canvLength/2, canvLength/2);
+    context.lineTo(canvLength/2, canvLength/2 + canvLength*28*r/300);
+    context.lineTo(canvLength/2-canvLength*28*r/300, canvLength/2);
+    context.lineTo(canvLength/2, canvLength/2);
+    context.closePath();
+    context.fillStyle = '#ff343b';
+    context.fill();
+
 }

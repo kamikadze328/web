@@ -8,7 +8,6 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Bean Validation" />
-          <element id="library" level="project" name="primefaces-6.1-sources" />
           <element id="library" level="project" name="icefaces-ace" />
           <element id="library" level="project" name="ojdbc8" />
         </element>

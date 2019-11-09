@@ -13,8 +13,6 @@ public class PointForPage implements Serializable {
     private String valueX;
     private String valueY;
     private String valueR;
-    @ManagedProperty(value = "#{point}")
-    private Point point;
 
     public String getValueX() {
         return valueX;
@@ -28,10 +26,6 @@ public class PointForPage implements Serializable {
         return valueR;
     }
 
-
-    public Point getPoint() {
-        return point;
-    }
 
     public void setValueX(String valueX) {
         this.valueX = valueX;
@@ -48,13 +42,11 @@ public class PointForPage implements Serializable {
     private Connection con;
     private int count;
 
-    public void setPoint(Point point) {
-        this.point = point;
-    }
 
     public PointForPage() {
         valueX = "-5";
         valueY = "-3";
+        valueR = "1";
         count = 0;
         try {
             con = getConnection();
@@ -99,7 +91,12 @@ public class PointForPage implements Serializable {
     }
 
     public void clearList() {
-
+        try (PreparedStatement stmt = con
+                .prepareStatement("Delete from POINTS where *");
+             ResultSet rs = stmt.executeQuery()) {
+        } catch (SQLException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        }
     }
 
     public List<Point> getPointsList() {
