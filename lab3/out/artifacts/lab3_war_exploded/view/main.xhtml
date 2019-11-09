@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" 
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      xmlns:ace="http://www.icefaces.org/icefaces/components" 
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <f:view>
@@ -29,89 +30,85 @@
         <div class="wrapper">
             <div class="header">
                 <span>Вариант 14778</span>
-                <span id="time"/>
+                <span id="time" />
                 <span class="student-info">Лукьяненко, Киселёв. P3210</span>
             </div>
             <div class="content" id="content">
                 <div class="img-form">
                     <h:form id="canvasForm" class="areas-img centered">
-                        <h:inputHidden id="canvasX" value="#{pointForPage.valueX}"/>
-                        <h:inputHidden id="canvasY" value="#{pointForPage.valueY}"/>
-                        <h:inputHidden id="canvasR" value="#{pointForPage.valueR}"/>
+                        <h:inputHidden id="canvasX" value="#{pointForPage.valueX}" />
+                        <h:inputHidden id="canvasY" value="#{pointForPage.valueY}" />
+                        <h:inputHidden id="canvasR" value="#{pointForPage.valueR}" />
                         <canvas id="plot" width="300" height="300">
                             Canvas not supported
                         </canvas>
-                        <h:commandButton id="canvasSubmit" style="display: none" action="#{pointForPage.addToList()}"/>
+                        <h:commandButton id="canvasSubmit" style="display: none" action="#{pointForPage.addToList()}" />
                     </h:form>
                     <h:form method="post" class="data-send-form" id="form">
                         <div class="form-input">
                             <div class="form-input-x">
                                 <h:outputLabel>X:</h:outputLabel>
-                                <h:inputText value = "#{pointForPage.valueX}" id="x-value" maxlength="15" a:placeholder="-5 ... 5"
-                                    type="text" validatorMessage="Введите корректный X (от -5 до 5)">
-                                    <f:validateDoubleRange minimum="-5.0" maximum="5.0" for="x-value"/>
-                                    <h:outputText value="#{pointForPage.valueX}"/>
+                                <h:inputText value="#{pointForPage.valueX}" id="x-value" maxlength="15"
+                                    a:placeholder="-5 ... 5" type="text"
+                                    validatorMessage="Введите корректный X (от -5 до 5)">
+                                    <f:validateDoubleRange minimum="-5.0" maximum="5.0" for="x-value" />
+                                    <h:outputText value="#{pointForPage.valueX}" />
                                 </h:inputText>
                             </div>
-                                    <ace:sliderEntry id="y-value"
-                                                     label="Y:"
-                                                     labelPosition="left"
-                                                     showLabels="false"
-                                                     value="#{pointForPage.valueY}"
-                                                     min="-3"
-                                                     max="5"
-                                                     length="160px"
-                                                     style="margin-top: 0px">
-                                        <ace:ajax event="slideEnd" render="sliderValue"/>
-                                    </ace:sliderEntry>
-                                    <h:outputLabel style="text-align: left; margin: 0.6%;"> Y=
-                                        <h:outputText id="sliderValue" value="#{pointForPage.valueY}"/>
-                                    </h:outputLabel>
+                            <ace:sliderEntry id="y-value" label="Y:" labelPosition="left" showLabels="false"
+                                value="#{pointForPage.valueY}" min="-3" max="5" length="160px" style="margin-top: 0px">
+                                <ace:ajax event="slideEnd" render="sliderValue" />
+                            </ace:sliderEntry>
+                            <h:outputLabel style="text-align: left; margin: 0.6%;"> Y=
+                                <h:outputText id="sliderValue" value="#{pointForPage.valueY}" />
+                            </h:outputLabel>
                             <div class="select-one-menu">
                                 <h:outputLabel style="float: left">R: </h:outputLabel>
-                                <h:selectOneMenu id="r_value" value="#{pointForPage.valueR}" style="width:160px; float:right">
+                                <!-- Слайдер неправильно реалигурет на клик по канвасу-->
+                                <h:selectOneMenu id="r_value" value="#{pointForPage.valueR}"
+                                    style="width:160px; float:right">
                                     <f:selectItem itemValue="1" itemLabel="1" />
                                     <f:selectItem itemValue="2" itemLabel="2" />
                                     <f:selectItem itemValue="3" itemLabel="3" />
                                     <f:selectItem itemValue="4" itemLabel="4" />
                                     <f:selectItem itemValue="5" itemLabel="5" />
-                                    <f:ajax event="valueChange" value="#{pointForPage.valueR}" render="canvasR" onevent="reDrawGraph()" immediate="true"/>
-                                    <f:ajax event="valueChange" value="#{pointForPage.valueR}" onevent="updateCanvasR()" immediate="true"/>
+                                    <f:ajax event="valueChange" value="#{pointForPage.valueR}" render="canvasR"
+                                        onevent="reDrawGraph()" immediate="true" />
+                                    <f:ajax event="valueChange" value="#{pointForPage.valueR}" onevent="updateCanvasR()"
+                                        immediate="true" />
                                 </h:selectOneMenu>
                             </div>
                             <div class="form-buttons">
-                                <h:commandButton value="Проверить" action="#{pointForPage.addToList()}" class="submit-button"/>
-                                <h:commandButton value="На главную" class="clear-button" action="toIndex"/>
+                                <h:commandButton value="Проверить" action="#{pointForPage.addToList()}"
+                                    class="submit-button" />
+                                <h:commandButton value="На главную" class="clear-button" action="toIndex" />
                             </div>
-                            <h:message for="x-value" class="error-log" id="error-log"/>
+                            <h:message for="x-value" class="error-log" id="error-log" />
                         </div>
                     </h:form>
                 </div>
                 <div class="table-wrapper">
-                        <h:dataTable value="#{pointForPage.getPointsList()}" var="points"
-                                     styleClass="table"
-                                     headerClass="filter__link"
-                                     rowClasses="table-row"
-                                     id="tableResults">
-                            <h:column>
-                                <f:facet name="header">X</f:facet>
-                                #{points.x}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Y</f:facet>
-                                #{points.y}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">R</f:facet>
-                                #{points.r}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Result/Answer</f:facet>
-                                #{points.answer}
-                            </h:column>
-                        </h:dataTable>
-                    </div>
+                    <h:dataTable value="#{pointForPage.getPointsList()}" var="points" styleClass="table"
+                        headerClass="filter__link" rowClasses="table-row" id="tableResults">
+                        <h:column>
+                            <f:facet name="header">X</f:facet>
+                            #{points.x}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Y</f:facet>
+                            #{points.y}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">R</f:facet>
+                            #{points.r}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Result/Answer</f:facet>
+                            #{points.answer}
+                        </h:column>
+                    </h:dataTable>
                 </div>
+            </div>
             <div class="centered footer">
                 <span class="student-info-footer">&copy;kamikadze328, 2019</span>
                 <p class="student-footer-icon">

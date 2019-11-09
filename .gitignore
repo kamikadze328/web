@@ -1,6 +1,6 @@
 
 lab1/Лаба1.docx
 lab2/Лаба2.docx
-lab1/out/
-lab2/out/
-lab3/out/
+lab1/out/*
+lab2/out/*
+lab3/out/*

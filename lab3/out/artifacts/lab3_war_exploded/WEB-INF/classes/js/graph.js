@@ -38,7 +38,6 @@ function drawGraph() {
     context.fillText("Y", canvLength/2-canvLength*20/300, canvLength*10/300);
     context.fillText("1", canvLength*173/300, canvLength/2-canvLength*10/300);
     context.fillText("1", canvLength/2-canvLength*17/300, canvLength*127/300);
-
 }
 
 function drawPoint(e) {
@@ -50,13 +49,12 @@ function drawPoint(e) {
     plot_context.beginPath();
     plot_context.rect(point.x, point.y, 5, 5);
     //console.log("x1: " + point.x.toFixed(2) +", "+ "y1: " + point.y.toFixed(2));
-    point.x = (point.x - 150)/28;
-    point.y = (-point.y + 150)/28;
+    point.x = (point.x - 150) / 28;
+    point.y = (-point.y + 150) / 28;
     //console.log("x2: " + point.x.toFixed(2) +", "+ "y2: " + point.y.toFixed(2));
     document.getElementById('canvasForm:canvasX').value = point.x.toFixed(2);
     document.getElementById('canvasForm:canvasY').value = point.y.toFixed(2);
     document.getElementById("canvasForm:canvasSubmit").click();
-    // Need to send the point on a server
 }
 
 function updateCanvasR() {
@@ -82,6 +80,7 @@ function getCursorPosition(e) {
         y: y - plot_canvas.getBoundingClientRect().top
     }
 }
+
 function reDrawGraph() {
     const plot_canvas = document.getElementById("plot");
     const context = plot_canvas.getContext('2d');
@@ -110,5 +109,4 @@ function drawArea() {
     context.closePath();
     context.fillStyle = '#ff343b';
     context.fill();
-
 }
