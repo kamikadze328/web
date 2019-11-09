@@ -1,4 +1,3 @@
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
@@ -40,14 +39,12 @@ public class PointForPage implements Serializable {
     }
 
     private Connection con;
-    private int count;
 
 
     public PointForPage() {
         valueX = "-5";
         valueY = "-3";
         valueR = "1";
-        count = 0;
         try {
             con = getConnection();
         } catch (SQLException | ClassNotFoundException e) {
@@ -90,19 +87,9 @@ public class PointForPage implements Serializable {
 
     }
 
-    public void clearList() {
-        try (PreparedStatement stmt = con
-                .prepareStatement("Delete from POINTS where *");
-             ResultSet rs = stmt.executeQuery()) {
-        } catch (SQLException e) {
-            System.out.println(Arrays.toString(e.getStackTrace()));
-        }
-    }
-
     public List<Point> getPointsList() {
         List<Point> list;
         list = new ArrayList<>();
-        count++;
         try (PreparedStatement stmt = con
                 .prepareStatement("select x, y, r, answer from POINTS");
              ResultSet rs = stmt.executeQuery()) {
