@@ -1,0 +1,20 @@
+Create sequence points_sequence 
+start with 1
+increment by 1
+minvalue 1
+maxvalue 10000;
+
+create table POINTS(
+    ID     NUMBER,
+    X      FLOAT     not null,
+    Y      FLOAT     not null,
+    R      FLOAT     not null,
+    ANSWER NUMBER(1) not null,
+	constraint points_sequence PRIMARY KEY(ID)
+);
+
+SQL> select sys_context('userenv','db_name') from dual;
+
+SYS_CONTEXT('USERENV','DB_NAME')
+--------------------------------------------------------------------------------
+orbis
