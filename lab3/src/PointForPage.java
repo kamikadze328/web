@@ -10,7 +10,9 @@ import java.util.List;
 @ApplicationScoped
 public class PointForPage implements Serializable {
     private String valueX;
+    private String canvasX;
     private String valueY;
+    private String canvasY;
     private String valueR;
 
     public String getValueX() {
@@ -25,6 +27,13 @@ public class PointForPage implements Serializable {
         return valueR;
     }
 
+    public String getCanvasX() {
+        return canvasX;
+    }
+
+    public String getCanvasY() {
+        return canvasY;
+    }
 
     public void setValueX(String valueX) {
         this.valueX = valueX;
@@ -36,6 +45,14 @@ public class PointForPage implements Serializable {
 
     public void setValueR(String valueR) {
         this.valueR = valueR;
+    }
+
+    public void setCanvasX(String canvasX) {
+        this.canvasX = canvasX;
+    }
+
+    public void setCanvasY(String canvasY) {
+        this.canvasY = canvasY;
     }
 
     private Connection con;
@@ -53,11 +70,15 @@ public class PointForPage implements Serializable {
     }
 
     public void addToList() {
-        try (PreparedStatement stmt = con.prepareStatement(
-                "INSERT INTO points(x, y, r, answer) values(?, ?, ?, ?)")) {
             double x = Double.parseDouble(valueX);
             double y = Double.parseDouble(valueY);
             int r = Integer.parseInt(valueR);
+            addToDataBase(x, y, r);
+    }
+
+    private void addToDataBase(double x, double y, int r){
+        try (PreparedStatement stmt = con.prepareStatement(
+                "INSERT INTO points(x, y, r, answer, id) values(?, ?, ?, ?, POINTS_SEQUENCE.nextval)")) {
             boolean answer = checkArea(x, y, r);
             stmt.setDouble(1, x);
             stmt.setDouble(2, y);
@@ -69,6 +90,13 @@ public class PointForPage implements Serializable {
         }
     }
 
+    public void addToListFromCanvas() {
+            double x = Double.parseDouble(canvasX);
+            double y = Double.parseDouble(canvasY);
+            int r = Integer.parseInt(valueR);
+            addToDataBase(x, y, r);
+    }
+
     private boolean checkArea(double x, double y, int r) {
         return (((x >= -r / 2.0 && x <= 0 && y <= r && y >= 0)
                 || (y >= -(x + r) && y <= 0 && x <= 0)
@@ -76,12 +104,12 @@ public class PointForPage implements Serializable {
     }
 
     private Connection getConnection() throws SQLException, ClassNotFoundException {
-        final String URL = "jdbc:oracle:thin:@//localhost:1521/orcl";
-        final String LOGIN = "system";
-        final String PASSWORD = "oracle";
+        final String URL = "jdbc:oracle:thin:@//localhost:1521/studs";
+        final String LOGIN = "s264434";
+        final String PASSWORD = "****";
         Connection con;
         Class.forName("oracle.jdbc.driver.OracleDriver");
-        con = DriverManager.getConnection(URL, LOGIN, PASSWORD);
+        con = DriverManager.getConnection(URL, LOGIN, "****");
         con.setAutoCommit(true);
         return con;
 
@@ -91,7 +119,7 @@ public class PointForPage implements Serializable {
         List<Point> list;
         list = new ArrayList<>();
         try (PreparedStatement stmt = con
-                .prepareStatement("select x, y, r, answer from POINTS");
+                .prepareStatement("select x, y, r, answer from POINTS order by ID");
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Point newPoint = new Point();
