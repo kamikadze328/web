@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', ()=> {
     document.querySelector("#plot").addEventListener('click', drawPoint);
-    //Обновляемое время
-    window.setInterval(updateTime, 1000);
     drawGraph();
 });
 

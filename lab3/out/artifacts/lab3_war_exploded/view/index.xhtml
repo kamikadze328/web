@@ -12,13 +12,31 @@
     <title>Главная</title>
     <h:outputStylesheet name="css/style.css" />
     <link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon.ico']}" />
+    <h:outputScript name="js/clock.js" />
 
 </h:head>
 
 <h:body>
+    <div class="wrapper">
+    <div class="header">
+        <span>Вариант 14778</span>
+        <span id="time" />
+        <span class="student-info">Лукьяненко, Киселёв. P3210</span>
+    </div>
+    <div class="content" id="content">
     <h:form>
         <h:commandButton value="К точкам" class="clear-button" action="toMain"/>
     </h:form>
+    </div>
+        <div class="centered footer">
+            <span class="student-info-footer">&copy;kamikadze328, 2019</span>
+            <p class="student-footer-icon">
+                <a href="https://github.com/kamikadze328" title="GitHub">
+                    <h:graphicImage name="img/GitHubIcon.png" />
+                </a>
+            </p>
+        </div>
+    </div>
 
 </h:body>
 </f:view>

@@ -11,3 +11,7 @@ function updateTime() {
     };
     document.querySelector("#time").innerHTML = date.toLocaleString("ru", options);
 }
+document.addEventListener('DOMContentLoaded', ()=> {
+    //Обновляемое время
+    window.setInterval(updateTime, 1000);
+});
