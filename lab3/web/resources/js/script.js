@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', ()=> {
     document.querySelector("#plot").addEventListener('click', drawPoint);
+    document.getElementById("form:submitButton").addEventListener('click', drawPointFromButton);
+
     drawGraph();
 });
 
@@ -98,6 +100,31 @@ function drawPoint(e) {
     document.getElementById('canvasForm:canvasX').value = definedPoint.x;
     document.getElementById('canvasForm:canvasY').value = definedPoint.y;
     document.getElementById("canvasForm:canvasSubmit").click();
+}
+function drawPointFromButton(e){
+    const selectorR = document.getElementById('form:r_value');
+    const r = Number(selectorR[selectorR.selectedIndex].value);
+    let x = Number(document.getElementById('form:x-value').value);
+    widget = ice.ace.instance('form:y-value');
+    let y = Number(widget.getValue());
+    const plot_canvas = document.querySelector("#plot");
+    const context = plot_canvas.getContext("2d");
+    context.beginPath();
+
+    if (checkArea(Number(x), Number(y), Number(r))) {
+        x = Number(x*28+150);
+        y = Number(150 -28*y);
+        context.arc(x, y, 2, 0, 2 * Math.PI);
+        context.fillStyle = '#9cd682';
+    }else {
+        x = Number(x*28+150);
+        y = Number(150 -28*y);
+        context.arc(x, y, 2, 0, 2 * Math.PI);
+        context.fillStyle = '#ff343b';
+    }
+    context.fill();
+    listOfPoint.push(new Point(x, y, r));
+
 }
 
 function drawDefinedPoint(context, point, r) {

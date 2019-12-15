@@ -1,3 +1,5 @@
+import jdk.nashorn.internal.objects.annotations.Property;
+
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
@@ -57,7 +59,6 @@ public class PointForPage implements Serializable {
 
     private Connection con;
 
-
     public PointForPage() {
         valueX = "-5";
         valueY = "-3";
@@ -104,15 +105,14 @@ public class PointForPage implements Serializable {
     }
 
     private Connection getConnection() throws SQLException, ClassNotFoundException {
-        final String URL = "jdbc:oracle:thin:@//localhost:1521/orcl";
-        final String LOGIN = "system";
-        final String PASSWORD = "oracle";
+        final String URL = "jdbc:oracle:thin:@//localhost:1521/orbis";
+        final String LOGIN = "s264434";
+        final String PASSWORD = "rvc077";
         Connection con;
         Class.forName("oracle.jdbc.driver.OracleDriver");
         con = DriverManager.getConnection(URL, LOGIN, PASSWORD);
         con.setAutoCommit(true);
         return con;
-
     }
 
     public List<Point> getPointsList() {
