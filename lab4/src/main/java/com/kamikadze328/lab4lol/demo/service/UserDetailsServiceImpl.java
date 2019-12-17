@@ -16,8 +16,12 @@ import java.util.Set;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -26,7 +30,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) throw new UsernameNotFoundException(username);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("user"));
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }

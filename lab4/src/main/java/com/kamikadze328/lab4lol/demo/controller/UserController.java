@@ -12,13 +12,15 @@ import com.kamikadze328.lab4lol.demo.service.UserService;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("account")
 public class UserController {
-
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @CrossOrigin
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -26,7 +28,7 @@ public class UserController {
         if (userService.findByUsername(newUser.getUsername()) != null) {
             logger.error("username Already exist " + newUser.getUsername());
             return new ResponseEntity<>(
-                    new RuntimeException("user with username " + newUser.getUsername() + "already exist "),
+                    new RuntimeException("user with username " + newUser.getUsername() + " already exist "),
                     HttpStatus.CONFLICT);
         }
 
@@ -37,9 +39,15 @@ public class UserController {
 
     @CrossOrigin
     @RequestMapping("/login")
-    public Principal user(Principal principal) {
-        logger.info("user logged "+principal);
-        return principal;
+    public ResponseEntity<?> user(Principal principal) {
+        String name;
+        if (principal != null) {
+            name = principal.getName();
+            logger.info("user logged " + name);
+        }else {
+            return new ResponseEntity<>("Wrong username or password", HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(name, HttpStatus.OK);
     }
 
 

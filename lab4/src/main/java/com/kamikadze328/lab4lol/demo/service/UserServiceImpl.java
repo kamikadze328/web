@@ -8,10 +8,14 @@ import com.kamikadze328.lab4lol.demo.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @Override
     public User save(User user) {

@@ -1,5 +1,8 @@
 package com.kamikadze328.lab4lol.demo.controller;
 
+import com.kamikadze328.lab4lol.demo.model.data.PointForClient;
+import org.hibernate.validator.constraints.URL;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.kamikadze328.lab4lol.demo.model.Graphic;
 import com.kamikadze328.lab4lol.demo.model.data.Point;
@@ -12,11 +15,13 @@ import java.util.Collection;
 import java.util.List;
 
 @RestController
+@URL
 public class PointController {
     private final PointRepository pointRepository;
     private final UserRepository userRepository;
     private final Graphic graphic;
 
+    @Autowired
     PointController(PointRepository pointRepository, UserRepository userRepository, Graphic graphic) {
         this.pointRepository = pointRepository;
         this.graphic = graphic;
@@ -25,9 +30,14 @@ public class PointController {
 
     @CrossOrigin
     @GetMapping("/points")
-    Collection<Point> allPoints(Principal user) {
+    Collection<PointForClient> allPoints(Principal user) {
         System.out.println("all points request from "+user.getName());
-        return pointRepository.findAllUserPoints(userRepository.findByUsername(user.getName()));
+        List<PointForClient> pointsForClient = new ArrayList<>();
+        Collection<Point> points = pointRepository.findAllUserPoints(userRepository.findByUsername(user.getName()));
+        for (Point p : points) {
+            pointsForClient.add(new PointForClient(p.getX(), p.getY(), p.getR(), p.getResult()));
+        }
+        return pointsForClient;
     }
 
     @CrossOrigin
@@ -38,20 +48,19 @@ public class PointController {
         return pointRepository.save(newPoint);
     }
 
-
     @CrossOrigin
     @GetMapping("/points/{r}")
-    Collection<Point> allPointsRecalculation(@PathVariable Double r, Principal user) {
-        List<Point> recalculated = new ArrayList<>();
+    Collection<PointForClient> allPointsRecalculation(@PathVariable Double r, Principal user) {
+        List<PointForClient> recalculatedPoints = new ArrayList<>();
         Collection<Point> points = pointRepository.findAllUserPoints(userRepository.findByUsername(user.getName()));
 
         for (Point p : points) {
-            Point point = new Point(p.getX(), p.getY(), r, false);
+            PointForClient point = new PointForClient(p.getX(), p.getY(), r, false);
             point.setResult(graphic.isInArea(point));
-            recalculated.add(point);
+            recalculatedPoints.add(point);
         }
 
-        return recalculated;
+        return recalculatedPoints;
     }
 
 //    @CrossOrigin
