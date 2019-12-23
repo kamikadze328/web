@@ -10,6 +10,8 @@ import com.kamikadze328.lab4lol.demo.model.data.User;
 import com.kamikadze328.lab4lol.demo.service.UserService;
 
 import java.security.Principal;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestController
 public class UserController {
@@ -25,16 +27,26 @@ public class UserController {
     @CrossOrigin
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<?> createUser(@RequestBody User newUser) {
-        if (userService.findByUsername(newUser.getUsername()) != null) {
-            logger.error("username Already exist " + newUser.getUsername());
-            return new ResponseEntity<>(
-                    new RuntimeException("user with username " + newUser.getUsername() + " already exist "),
-                    HttpStatus.CONFLICT);
+        Pattern pattern = Pattern.compile(
+                "[" +                   //начало списка допустимых символов
+                        "а-яА-ЯёЁ" +    //буквы русского алфавита
+                        "\\p{Punct}" +  //знаки пунктуации
+                        "]" +                   //конец списка допустимых символов
+                        "*");                   //допускается наличие указанных символов в любом количестве
+        if (pattern.matcher(newUser.getUsername()).matches()) {
+            return new ResponseEntity<>("Unacceptable symbols", HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+        } else {
+            if (userService.findByUsername(newUser.getUsername()) != null) {
+                logger.error("username Already exist " + newUser.getUsername());
+                return new ResponseEntity<>(
+                        new RuntimeException("user with username " + newUser.getUsername() + " already exist "),
+                        HttpStatus.CONFLICT);
+            }
+
+            logger.info("user registered " + newUser.getUsername());
+
+            return new ResponseEntity<>(userService.save(newUser), HttpStatus.CREATED);
         }
-
-        logger.info("user registered " + newUser.getUsername());
-
-        return new ResponseEntity<>(userService.save(newUser), HttpStatus.CREATED);
     }
 
     @CrossOrigin

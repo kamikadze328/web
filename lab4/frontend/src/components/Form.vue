@@ -156,7 +156,7 @@
         background-size: 15px;
         width: 15px;
         height: 15px;
-        background-image: url("/src/assets/warning.svg");
+        background-image: url("/assets/warning.svg");
         vertical-align: top;
         margin: 2px 0 0 6px;
         transition: opacity 0.5s ease;

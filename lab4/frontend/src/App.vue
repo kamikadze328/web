@@ -4,7 +4,7 @@
         <div class="header-inner">
             <div>Лукьяненко, Киселев, Р3210</div>
             <a class="header-logo" href="https://se.ifmo.ru/courses/web">
-                <img src="@/assets/itmo_logo.png" alt="itmo logo">
+                <img crossorigin="anonymous" src="./assets/itmo_logo.png" alt="itmo logo">
             </a>
             <div>Вариант 82183</div>
         </div>
@@ -36,8 +36,9 @@
 
     body {
         background-color: #f7f7f7;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Roboto', Arial, sans-serif;
         overflow-x: hidden;
+        color: #2c3e50;
     }
 
     table {
@@ -60,7 +61,11 @@
     h2 {
         margin-bottom: 15px;
         font-weight: 500;
-        color: #2c3e50;
+    }
+
+    input {
+        font-family: 'Roboto', Arial, sans-serif;
+        outline: 0;
     }
 
     .header {

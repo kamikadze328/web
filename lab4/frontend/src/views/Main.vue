@@ -3,7 +3,7 @@
         <div class="content">
             <div class="links">
                 <h2>Укажите параметры X, Y и R</h2>
-                <a href="/" v-on:click.prevent="logoutRequest">Выйти</a>
+                <a href="/" v-on:click.prevent="logoutRequest" class="logout">Выйти</a>
             </div>
             <div class="content-wrapper">
                 <div v-on:click="addPointFromCanvas" class="graph">
@@ -14,24 +14,25 @@
                     <form v-on:submit.prevent="addPoint">
                         <div class="form-select x-select">
                             <label class="selection-label">Выберите X
-                                <span class="warning" data-validate="Выберите X"></span>
+                                <span :class="{'icon-visible':!xValid}" class="warning" data-validate="Выберите X"></span>
                             </label>
                             <div class="select-buttons">
-                                <button v-for="num in buttons" v-bind:key="num" class="changeX" type="button">{{num}}</button>
+                                <button v-for="num in buttons" v-bind:key="num" v-model="x" @click="changeButton" class="changeX" type="button">{{num}}</button>
                             </div>
                         </div>
                         <div class="form-select y-select">
-                            <label class="selection-label" for="Y-select">Выберите Y
-                                <span class="warning" data-validate="Y - значение в диапазоне [-3; 3]"></span>
+                            <!--suppress XmlInvalidId -->
+                            <label class="selection-label" for="Y-select">Введите Y
+                                <span :class="{'icon-visible':!yValid}" class="warning" data-validate="Y - значение в диапазоне [-3; 3]"></span>
                             </label>
-                            <input id="Y-select" type="text" placeholder="-3...3" name="y" autocomplete="off">
+                            <number-input v-model="y" @change="validateY" :step="0.001" :attrs="{id: 'Y-select'}" type="text" placeholder="-3...3" name="y" size="small" autocomplete="off"></number-input>
                         </div>
                         <div class="form-select r-select">
                             <label class="selection-label">Выберите R
-                                <span class="warning" data-validate="Выберите R"></span>
+                                <span :class="{'icon-visible':!rValid}" class="warning" data-validate="R - положительное число"></span>
                             </label>
                             <div class="select-buttons">
-                                <button v-for="num in buttons" v-bind:class="{'btn-hold': (num === 1)}" v-bind:key="num" class="changeR" type="button">{{num}}</button>
+                                <button v-for="num in buttons" v-bind:key="num" v-bind:class="{'btn-hold':(num === 1)}" v-model="r" @click="changeButton($event); reDrawGraph()" class="changeR" type="button">{{num}}</button>
                             </div>
                         </div>
                         <div class="form-buttons">
@@ -41,13 +42,15 @@
                 </div>
 
                 <table class="results">
-                    <tbody v-if="listOfPoints.length">
+                    <thead>
                         <tr>
                             <th>X</th>
                             <th>Y</th>
                             <th>R</th>
                             <th>Попадание</th>
                         </tr>
+                    </thead>
+                    <tbody v-if="listOfPoints.length">
                         <tr v-for="cPoint in listOfPoints">
                             <td>{{cPoint.x}}</td>
                             <td>{{cPoint.y}}</td>
@@ -57,12 +60,6 @@
                         </tr>
                     </tbody>
                     <tbody v-else>
-                    <tr>
-                        <th>X</th>
-                        <th>Y</th>
-                        <th>R</th>
-                        <th>Попадание</th>
-                    </tr>
                         <tr>
                             <td colspan="4">Нет данных</td>
                         </tr>
@@ -74,15 +71,19 @@
 </template>
 
 <script>
-    import $ from 'jquery';
-
     export default {
         name: "Main",
         data() {
             return {
                 response: null,
                 listOfPoints: [],
-                buttons: [-4, -3, -2, -1, 0, 1, 2, 3, 4]
+                buttons: [-4, -3, -2, -1, 0, 1, 2, 3, 4],
+                x: null,
+                y: null,
+                r: 1,
+                xValid: true,
+                yValid: true,
+                rValid: true
             }
         },
         methods: {
@@ -96,16 +97,13 @@
                     this.response = response;
                     localStorage.removeItem('currentUser');
                     this.$router.push('/');
-                    return true;
                 }).catch(error => {
                     console.log(error.response.data);
-                    return false;
                 });
             },
             getPointsRequest: function () {
                 let base64Credential = localStorage.getItem('currentUser');
-                console.log(base64Credential);
-                this.$axios({
+                return this.$axios({
                     method: 'get',
                     url: this.$BaseURL + 'points',
                     headers: {
@@ -114,19 +112,16 @@
                         'Authorization': base64Credential
                     }
                 }).then(response => {
-                    console.log(response.data);
-                    if(response.data.length){
-                        this.listOfPoints = response.data;
+                    if (response.data.length){
+                        this.listOfPoints.splice(0, this.listOfPoints.length, ...response.data);
                     }
-                    return true;
                 }).catch(error => {
                     console.log(error.response.data);
-                    return false;
                 });
             },
             addPointRequest: function (x, y, r) {
                 let base64Credential = localStorage.getItem('currentUser');
-                this.$axios({
+                return this.$axios({
                     method: 'post',
                     url: this.$BaseURL + 'points',
                     headers: {
@@ -135,119 +130,57 @@
                         'Authorization': base64Credential
                     },
                     data: {x: x, y: y, r: r}
-                }).then(response => this.response = response);
+                }).then(response => {
+                    let result = response.data.result;
+                    this.drawDefinedPoint(x, y, result);
+                    this.listOfPoints.push({x: x, y: y, r: r, result: result});
+                    this.response = response;
+                }).catch(error => {
+                    console.log(error.response.data);
+                    return false;
+                });
             },
             addPointFromCanvas: function (e) {
-                let r = document.querySelector('.r-select .btn-hold').innerText;
-                const point = this.getCursorPosition(e);
-                const plot_canvas = document.getElementById("plot");
-                const context = plot_canvas.getContext("2d");
-                const definedPoint = this.drawDefinedPoint(context, point.x, point.y, r);
-                const x = definedPoint.x;
-                const y = definedPoint.y;
-                this.addPointRequest(x, y, r);
-                if(this.checkArea(Number(x), Number(y), Number(r))) {
-                    this.listOfPoints.push({x: x, y: y, r: r, result:true });
-                }
-                else{
-                    this.listOfPoints.push({x: x, y: y, r: r, result:false });
-                }
-
+                const point = this.getPointCoordinates(e);
+                this.addPointRequest(point.x, point.y, this.r);
             },
             addPoint: function () {
-                let xSelect = document.querySelector('.x-select .btn-hold');
-                let x = xSelect ? xSelect.innerText : null;
-                let y = document.getElementById('Y-select').value.trim();
-                let rSelect = document.querySelector('.r-select .btn-hold');
-                let r = rSelect ? rSelect.innerText : null;
-
-                let validX = !!x;
-                let validY = false;
-                let validR = !!r;
-                if (!validX) {$('.x-select .warning').addClass('icon-visible')}
-                if (!validR) {$('.r-select .warning').addClass('icon-visible')}
-
-                if (y.match(/^-?[0-9]*[.,]?[0-9]+$/) && y && y !== '-') {
-                    y = y.replace(',', '.');
-                    if (y >= -3 && y <= 3) {
-                        validY = true;
-                    }
-                }
-                if (!validY) {
-                    $('.y-select .warning').addClass('icon-visible');
-                }
-
-                if (validX && validY && validR) {
-                    console.log('all is correct (X Y R)');
-                    this.listOfPoints.push({x: x, y: y, r: r, result: false});
-                    this.addPointRequest(x, y, r);
-
-                    //draw this point
-                    const plot_canvas = document.querySelector("#plot");
-                    const context = plot_canvas.getContext("2d");
-                    context.beginPath();
-
-                    if (this.checkArea(Number(x), Number(y), Number(r))) {
-                        this.listOfPoints[this.listOfPoints.length - 1].result = true;
-
-                        x = Number(x * 28 + 150);
-                        y = Number(150 - 28 * y);
-                        context.arc(x, y, 2, 0, 2 * Math.PI);
-                        context.fillStyle = '#ff343b';
-                    } else {
-                        this.listOfPoints[this.listOfPoints.length - 1].result = false;
-
-                        x = Number(x * 28 + 150);
-                        y = Number(150 - 28 * y);
-                        context.arc(x, y, 2, 0, 2 * Math.PI);
-                        context.fillStyle = '#6edddd';
-                    }
-                    context.fill();
+                if (this.x == null) {this.xValid = false}
+                if (this.y == null) {this.yValid = false}
+                if (this.r == null) {this.rValid = false}
+                if (this.xValid && this.yValid && this.rValid) {
+                    this.addPointRequest(this.x, this.y, this.r);
                 }
             },
-            drawDefinedPoint: function (context, xFromList, yFromList, r) {
-                let point = {x:Number(xFromList), y:Number(yFromList)};
+            drawDefinedPoint: function (x , y, result) {
+                const plot_canvas = document.querySelector("#plot");
+                const context = plot_canvas.getContext("2d");
                 context.beginPath();
-                context.arc(point.x, point.y, 2, 0, 2 * Math.PI);
-                const x = ((point.x - 150) / 28).toFixed(2);
-                const y = ((-point.y + 150) / 28).toFixed(2);
-                if (this.checkArea(Number(x), Number(y), Number(r))) {
-                    context.fillStyle = '#ff343b';
-                } else {
-                    context.fillStyle = '#6edddd';
-                }
+                context.arc(x*28 + 150, 150 - 28*y, 2, 0, 2 * Math.PI);
+                context.fillStyle = (result) ? '#ff343b' : '#31DECA';
                 context.fill();
-                return {x: x, y: y};
             },
-            getCursorPosition: function (e) {
-                let x;
-                let y;
-                const plot_canvas = document.getElementById("plot");
-                if (e.pageX !== undefined && e.pageY !== undefined) {
-                    x = e.pageX;
-                    y = e.pageY;
-                } else {
-                    x = e.clientX + document.body.scrollLeft +
-                        document.documentElement.scrollLeft;
-                    y = e.clientY + document.body.scrollTop +
-                        document.documentElement.scrollTop;
-                }
+            // Возвращает реальную координату точки
+            getPointCoordinates: function (e) {
                 return {
-                    x: x - plot_canvas.getBoundingClientRect().left,
-                    y: y - plot_canvas.getBoundingClientRect().top
+                    x: ((e.offsetX - 150) / 28).toFixed(2),
+                    y: ((-e.offsetY + 150) / 28).toFixed(2)
                 }
             },
+            // Возможно избавиться
             checkArea: function (x, y, r) {
-                return (((x >= -r / 2.0 && x <= 0 && y <= r && y >= 0)
+                return (((x >= -r/2 && x <= 0 && y <= r && y >= 0)
                     || ((y >= -(x + r)) && y <= 0 && x <= 0)
-                    || ((x * x + y * y) <= r * r / 4.0 && x >= 0 && y <= 0)));
+                    || ((x*x + y*y) <= r*r/4 && x >= 0 && y <= 0)));
             },
             drawGraph: function () {
                 const plot_canvas = document.querySelector("#plot");
                 const context = plot_canvas.getContext("2d");
                 let canvLength = plot_canvas.width;
 
-                this.drawArea(context, canvLength);
+                if (this.rValid) {
+                    this.drawArea(context, canvLength);
+                }
 
                 context.beginPath();
                 //Ox
@@ -283,29 +216,26 @@
                 context.fillText("1", canvLength / 2 - canvLength * 17 / 300, canvLength * 127 / 300);
 
                 //Already drawn points
-                let r = document.querySelector('.r-select .btn-hold').innerText;
                 for (let point of this.listOfPoints) {
-                    const x = Number(Number(point.x) * 28 + 150);
-                    const y = Number(150 - 28 * Number(point.y));
-                    this.drawDefinedPoint(context, x, y, r);
+                    let result = this.checkArea(point.x, point.y, this.r);
+                    this.drawDefinedPoint(point.x, point.y, result);
                 }
             },
             drawArea: function (context, canvLength) {
-                let r = document.querySelector('.r-select .btn-hold').innerText;
                 context.beginPath();
-                context.arc(canvLength / 2, canvLength / 2, canvLength * 28 * (r / 2) / 300, 0, Math.PI / 2);
+                context.arc(canvLength / 2, canvLength / 2, canvLength * 28 * (this.r / 2) / 300, 0, Math.PI / 2);
                 context.lineTo(canvLength / 2, canvLength / 2);
                 context.closePath();
-                context.rect(canvLength / 2 - canvLength * 28 * (r / 2) / 300, canvLength / 2 - canvLength * 28 * r / 300, canvLength * 28 * (r / 2) / 300, canvLength * 28 * r / 300);
-                context.fillStyle = '#6edddd';
+                context.rect(canvLength / 2 - canvLength * 28 * (this.r / 2) / 300, canvLength / 2 - canvLength * 28 * this.r / 300, canvLength * 28 * (this.r / 2) / 300, canvLength * 28 * this.r / 300);
+                context.fillStyle = '#31DECA';
                 context.fill();
                 context.beginPath();
                 context.moveTo(canvLength / 2, canvLength / 2);
-                context.lineTo(canvLength / 2, canvLength / 2 + canvLength * 28 * r / 300);
-                context.lineTo(canvLength / 2 - canvLength * 28 * r / 300, canvLength / 2);
+                context.lineTo(canvLength / 2, canvLength / 2 + canvLength * 28 * this.r / 300);
+                context.lineTo(canvLength / 2 - canvLength * 28 * this.r / 300, canvLength / 2);
                 context.lineTo(canvLength / 2, canvLength / 2);
                 context.closePath();
-                context.fillStyle = '#6edddd';
+                context.fillStyle = '#31DECA';
                 context.fill();
             },
             reDrawGraph: function () {
@@ -313,36 +243,34 @@
                 const context = plot_canvas.getContext('2d');
                 context.clearRect(0, 0, plot_canvas.width, plot_canvas.height);
                 this.drawGraph();
+            },
+            changeButton: function (event) {
+                Array.from(event.target.parentElement.children).forEach(el => el.classList.remove('btn-hold'));
+                switch (event.target.className) {
+                    case 'changeX':
+                        this.x = parseInt(event.target.innerText);
+                        this.xValid = true;
+                        break;
+                    case 'changeR':
+                        this.r = parseInt(event.target.innerText);
+                        this.rValid = this.r > 0;
+                        break;
+                }
+                event.target.classList.add('btn-hold');
+            },
+            validateY: function () {
+                this.yValid = this.y >= -3 && this.y <= 3;
             }
-
         },
         mounted() {
-            const vm = this;
-            $('.changeR').on('click', function () {
-                $(this).siblings().removeClass('btn-hold');
-                $(this).addClass('btn-hold');
-                $(this).parent().parent().find('.warning').removeClass('icon-visible');
-                vm.reDrawGraph();
+            // При загрузке страницы получаем от сервера массив точек и добавляем его в data
+            this.getPointsRequest().then(() => {
+                this.$nextTick(() => {
+                    this.drawGraph();
+                });
             });
-            $('.changeX').on('click', function () {
-                $(this).siblings().removeClass('btn-hold');
-                $(this).addClass('btn-hold');
-                $(this).parent().parent().find('.warning').removeClass('icon-visible');
-            });
-            this.drawGraph();
-            // При переходе на страницу получаем от сервера массив точек и добавляем его в data
-            let response = this.getPointsRequest();
-            if(response){
-                this.listOfPoints = response;
-            }
-        },
+        }
     }
-
-    $(document).ready(function () {
-        $('#Y-select').on('focus', function () {
-            $('.y-select .warning').removeClass('icon-visible');
-        });
-    });
 </script>
 
 <style scoped>
@@ -360,7 +288,7 @@
 
     .content-wrapper > * {
         margin-bottom: 15px;
-        box-shadow: 0 2px 10px rgba(59, 64, 69, 0.1);
+        box-shadow: 0 2px 10px rgba(59, 64, 69, 0.08);
     }
 
     .links {
@@ -388,7 +316,7 @@
         width: 300px;
         margin-right: 20px;
         background-color: #fff;
-        border-radius: 6px;
+        border-radius: 5px;
     }
 
     #plot {
@@ -420,25 +348,30 @@
     }
 
     .select-buttons {
-        display: flex;
-        justify-content: space-between;
     }
 
     .select-buttons > button {
         display: inline-block;
-        width: 1.5rem;
-        margin-right: 3px;
-        padding: 3px 0;
-        background-color: #fff;
+        width: 1.7rem;
+        padding: 4px 0;
+        background-color: transparent;
         border: 1px solid #c8c8c8;
-        border-radius: 4px;
+        border-right: 0;
         text-align: center;
         outline: none;
         cursor: pointer;
+        transition: background-color, color .15s, .15s ease, ease;
+    }
+
+    .select-buttons > button:first-child {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
     }
 
     .select-buttons > button:last-child {
-        margin-right: 0;
+        border-right: 1px solid #c8c8c8;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
     }
 
     .select-buttons > button:hover {
@@ -448,19 +381,6 @@
     .btn-hold {
         background-color: #4F93E8 !important;
         color: #fff;
-    }
-
-    #Y-select {
-        display: block;
-        width: 2rem;
-        padding: 3px 5px 2px 5px;
-        border: solid 1px #c8c8c8;
-        border-radius: 4px;
-        outline: 0;
-    }
-
-    #Y-select:focus {
-        border-color: #2086d2;
     }
 
     .form-btn {
@@ -475,12 +395,12 @@
     }
 
     .btn-submit {
-        background-color: #14ce81;
+        background-color: #2ed1be;
         margin-right: 5px;
     }
 
-    .submit-form:hover {
-        background-color: hsla(155, 82%, 40%, 1);
+    .btn-submit:hover {
+        background-color: #2ac0af;
     }
 
     .clear-cookie {
@@ -533,23 +453,65 @@
 
     /* ====== Table ====== */
 
+    /*.table-wrapper {*/
+        /*display: flex;*/
+        /*flex-grow: 1;*/
+    /*}*/
+
     .results {
+        border-radius: 4px;
         flex-grow: 1;
     }
 
     .results tr:nth-child(odd) {
+        background-color: #fff;
+    }
+
+    .results tr:nth-child(even) {
         background-color: #f5f5f5;
     }
 
     .results th {
-        background-color: #6edddd;
+        background-color: #4fd8c8;
         font-weight: 500;
     }
 
-    .results td, .results th{
-        border: solid 1px #747474;
+    .results td, .results th {
+        border-right: solid 2px #ededed;
         /* width: 14%; */
         padding: 5px 4px;
         text-align: center;
+    }
+
+    .results tr td:last-child, .results tr th:last-child {
+        border-right: 0;
+    }
+
+    .results tr:first-child th:first-child {
+        border-top-left-radius: 5px;
+    }
+    .results tr:first-child th:last-child {
+        border-top-right-radius: 5px;
+    }
+    .results tr:last-child td:first-child {
+        border-bottom-left-radius: 5px;
+    }
+    .results tr:last-child td:last-child {
+        border-bottom-right-radius: 5px;
+    }
+</style>
+
+<style>
+    #Y-select {
+        display: block;
+        width: 2rem;
+        min-width: 1rem;
+        padding: 0 0.5rem;
+        border: solid 1px #c8c8c8;
+        border-radius: 4px;
+    }
+
+    #Y-select:focus {
+        border-color: #2086d2;
     }
 </style>

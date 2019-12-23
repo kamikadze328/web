@@ -42,49 +42,10 @@ public class PointController {
 
     @CrossOrigin
     @PostMapping("/points")
-    Point newPoint(@RequestBody Point newPoint, Principal user) {
+    PointForClient newPoint(@RequestBody Point newPoint, Principal user) {
         newPoint.setResult(graphic.isInArea(newPoint));
         newPoint.setUser(userRepository.findByUsername(user.getName()));
-        return pointRepository.save(newPoint);
+        Point p = pointRepository.save(newPoint);
+        return new PointForClient(p.getX(), p.getY(), p.getR(), p.getResult());
     }
-
-    @CrossOrigin
-    @GetMapping("/points/{r}")
-    Collection<PointForClient> allPointsRecalculation(@PathVariable Double r, Principal user) {
-        List<PointForClient> recalculatedPoints = new ArrayList<>();
-        Collection<Point> points = pointRepository.findAllUserPoints(userRepository.findByUsername(user.getName()));
-
-        for (Point p : points) {
-            PointForClient point = new PointForClient(p.getX(), p.getY(), r, false);
-            point.setResult(graphic.isInArea(point));
-            recalculatedPoints.add(point);
-        }
-
-        return recalculatedPoints;
-    }
-
-//    @CrossOrigin
-//    @PutMapping("/points/{id}")
-//    Point replacePoint(@RequestBody Point newPoint, @PathVariable Long id) {
-//
-//        return pointRepository.findById(id)
-//                .map(point -> {
-//                    point.setX(newPoint.getX());
-//                    point.setY(newPoint.getY());
-//                    point.setR(newPoint.getR());
-//                    point.setInArea(graphic.isInArea(newPoint));
-//                    return pointRepository.save(point);
-//                })
-//                .orElseGet(() -> {
-//                    newPoint.setInArea(graphic.isInArea(newPoint));
-//                    newPoint.setId(id);
-//                    return pointRepository.save(newPoint);
-//                });
-//    }
-
-//    @CrossOrigin
-//    @DeleteMapping("/points/{id}")
-//    void deletePoint(@PathVariable Long id) {
-//        pointRepository.deleteById(id);
-//    }
 }

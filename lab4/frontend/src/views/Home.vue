@@ -47,6 +47,11 @@
                 repassword: null
             }
         },
+        watch: {
+            action: function () {
+                this.errors.splice(0, this.errors.length);
+            }
+        },
         methods: {
             checkForm: function () {
                 this.errors = [];
@@ -88,7 +93,7 @@
                         password: this.password
                     }
                 }).then(() => {
-                    this.success = 'Успешно!';
+                    this.success = 'Аккаунт успешно создан!';
                     return true;
                 }).catch(error => {
                     error.response.status === 409 ? this.errors.push('Имя пользователя занято') : this.errors.push('Ошибка регистрации');
