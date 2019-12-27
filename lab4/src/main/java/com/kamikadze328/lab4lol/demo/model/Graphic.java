@@ -1,8 +1,8 @@
 package com.kamikadze328.lab4lol.demo.model;
 
+import com.kamikadze328.lab4lol.demo.model.data.Point;
 import com.kamikadze328.lab4lol.demo.model.data.PointForClient;
 import org.springframework.stereotype.Component;
-import com.kamikadze328.lab4lol.demo.model.data.Point;
 
 @Component
 public class Graphic {

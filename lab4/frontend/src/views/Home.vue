@@ -29,11 +29,8 @@
                 Создать аккаунт
                 </span>
             </button>
-            <div class="login-error" v-if="errors.length">
-                <p v-for="error in errors" v-bind:key="error" class="red">{{error}}</p>
-            </div>
-            <div class="login-error" v-else>
-                <p class="green">{{success}}</p>
+            <div class="response-message">
+                <p :class="[(response.status >= 200 && response.status < 300) ? 'green' : 'red']">{{response.message}}</p>
             </div>
         </form>
     </div>
@@ -44,12 +41,15 @@
         name: "Home",
         data() {
             return {
-                response: null,
                 action: 'login',
                 errors: {
                     name: '',
                     password: '',
                     passwordConfirm: ''
+                },
+                response: {
+                    status: null,
+                    message: ''
                 },
                 success: '',
                 name: null,
@@ -58,13 +58,6 @@
                 nameValid: true,
                 passwordValid: true,
                 confirmValid: true
-            }
-        },
-        watch: {
-            action: function () {
-                this.nameValid = true;
-                this.passwordValid = true;
-                this.confirmValid = true;
             }
         },
         methods: {
@@ -77,12 +70,11 @@
                         username: this.name,
                         password: this.password
                     }
-                }).then(() => {
-                    this.success = 'Аккаунт успешно создан!';
-                    return true;
+                }).then((response) => {
+                    this.response = {status: response.status, message: 'Аккаунт успешно создан!'};
                 }).catch(error => {
-                    error.response.status === 409 ? this.errors.push('Имя пользователя занято') : this.errors.push('Ошибка регистрации');
-                    return false;
+                    this.response.status = error.response.status;
+                    error.response.status === 409 ? this.response.message = 'Имя пользователя занято' : this.response.message = 'Ошибка регистрации';
                 });
             },
             loginRequest: function () {
@@ -92,23 +84,22 @@
                     url: this.$BaseURL + this.action,
                     headers: {'Content_type': 'application/json', 'Authorization':  base64Credential}
                 }).then(response => {
-                    this.response = response;
+                    this.response = {status: response.status, message: 'Вход выполнен успешно!'};
                     localStorage.setItem('currentUser', base64Credential);
                     this.$router.push('/main');
-                    return true;
                 }).catch(error => {
-                    error.response.status === 401 ? this.errors.push('Неверный логин или пароль') : this.errors.push('Ошибка авторизации');
-                    return false;
+                    this.response.status = error.response.status;
+                    error.response.status === 401 ? this.response.message = 'Неверный логин или пароль' : this.response.message = 'Ошибка авторизации';
                 });
             },
             checkForm: function () {
-                if (this.nameValid && this.passwordValid && this.confirmValid) {
-                    if (this.action === 'register') {
-                        if (this.registerRequest()) {
-                            this.loginRequest();
-                        }
+                if (this.action === 'register') {
+                    if (this.nameValid && this.passwordValid && this.confirmValid) {
+                        this.registerRequest()
                     }
-                    else if (this.action === 'login') {
+                }
+                else if (this.action === 'login') {
+                    if (this.nameValid && this.passwordValid) {
                         this.loginRequest();
                     }
                 }

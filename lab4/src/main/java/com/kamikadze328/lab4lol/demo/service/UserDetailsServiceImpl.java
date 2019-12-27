@@ -1,5 +1,7 @@
 package com.kamikadze328.lab4lol.demo.service;
 
+import com.kamikadze328.lab4lol.demo.model.data.User;
+import com.kamikadze328.lab4lol.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,8 +10,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.kamikadze328.lab4lol.demo.model.data.User;
-import com.kamikadze328.lab4lol.demo.repositories.UserRepository;
 
 import java.util.HashSet;
 import java.util.Set;

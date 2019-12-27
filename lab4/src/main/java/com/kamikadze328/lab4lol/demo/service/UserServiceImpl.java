@@ -1,10 +1,10 @@
 package com.kamikadze328.lab4lol.demo.service;
 
+import com.kamikadze328.lab4lol.demo.model.data.User;
+import com.kamikadze328.lab4lol.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.kamikadze328.lab4lol.demo.model.data.User;
-import com.kamikadze328.lab4lol.demo.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
