@@ -133,7 +133,7 @@
                 }).then(response => {
                     let result = response.data.result;
                     this.drawDefinedPoint(x, y, result);
-                    this.listOfPoints.push({x: x, y: y, r: r, result: result});
+                    this.listOfPoints.unshift({x: x, y: y, r: r, result: result});
                     this.response = response;
                 }).catch(error => {
                     console.log(error.response.data);
@@ -148,6 +148,7 @@
                 if (this.x == null) {this.xValid = false}
                 if (this.y == null) {this.yValid = false}
                 if (this.r == null) {this.rValid = false}
+
                 if (this.xValid && this.yValid && this.rValid) {
                     this.addPointRequest(this.x, this.y, this.r);
                 }
@@ -167,7 +168,6 @@
                     y: ((-e.offsetY + 150) / 28).toFixed(2)
                 }
             },
-            // Возможно избавиться
             checkArea: function (x, y, r) {
                 return (((x >= -r/2 && x <= 0 && y <= r && y >= 0)
                     || ((y >= -x - r) && y <= 0 && x <= 0)
@@ -410,11 +410,6 @@
 
     .clear-cookie:hover {
         background-color: hsl(17, 83%, 44%);
-    }
-
-    .icon-visible {
-        visibility: visible !important;
-        opacity: 1;
     }
 
     .warning {

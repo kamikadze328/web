@@ -1,8 +1,5 @@
 <template>
-    <div class="wrapper">
-        <!--<h3 style="text-align: center">-->
-            <!--<router-link to="/main">На main</router-link>-->
-        <!--</h3>-->
+    <div class="form-wrapper">
         <form v-on:submit.prevent="checkForm">
             <input v-model="action" checked="" id="signin" name="action" type="radio" value="login">
             <label for="signin">Вход</label>
@@ -10,9 +7,18 @@
             <label for="signup">Регистрация</label>
             <div id="wrapper">
                 <div id="arrow"></div>
-                <input v-model="name" minlength="3" id="email"  placeholder="Имя" type="text">
-                <input v-model="password" minlength="3" id="pass" placeholder="Пароль" type="password">
-                <input v-model="repassword" minlength="3" id="repass" placeholder="Повторите пароль" type="password">
+                <div :class="{'invalid':!nameValid}" class="warning">
+                    <input v-model="name" @change="validateInput" minlength="3" maxlength="25" id="name" placeholder="Имя" type="text">
+                    <span :data-validate="errors.name"></span>
+                </div>
+                <div :class="{'invalid':!passwordValid}" class="warning">
+                    <input v-model="password" @change="validateInput" minlength="3" maxlength="25" id="password" placeholder="Пароль" type="password">
+                    <span :data-validate="errors.password"></span>
+                </div>
+                <div :class="{'invalid':!confirmValid}" class="warning">
+                    <input v-model="passwordConfirm" @change="validateInput" minlength="3" maxlength="25" id="confirm" placeholder="Повторите пароль" type="password">
+                    <span :data-validate="errors.passwordConfirm"></span>
+                </div>
             </div>
             <button type="submit">
                 <span>
@@ -40,49 +46,28 @@
             return {
                 response: null,
                 action: 'login',
-                errors: [],
+                errors: {
+                    name: '',
+                    password: '',
+                    passwordConfirm: ''
+                },
                 success: '',
                 name: null,
                 password: null,
-                repassword: null
+                passwordConfirm: null,
+                nameValid: true,
+                passwordValid: true,
+                confirmValid: true
             }
         },
         watch: {
             action: function () {
-                this.errors.splice(0, this.errors.length);
+                this.nameValid = true;
+                this.passwordValid = true;
+                this.confirmValid = true;
             }
         },
         methods: {
-            checkForm: function () {
-                this.errors = [];
-
-                if (!this.name) {
-                    this.errors.push('Укажите имя');
-                }
-                if (!this.password) {
-                    this.errors.push('Укажите пароль');
-                }
-                if (this.action === 'register') {
-                    if (!this.repassword) {
-                        this.errors.push('Укажите пароль еще раз');
-                    }
-                    else {
-                        if (this.password !== this.repassword) {
-                            this.errors.push('Пароли не совпадают');
-                        }
-                    }
-                }
-                if (!this.errors.length) {
-                    if (this.action === 'register') {
-                        if (this.registerRequest()) {
-                            this.loginRequest();
-                        }
-                    }
-                    else if (this.action === 'login') {
-                        this.loginRequest();
-                    }
-                }
-            },
             registerRequest: function () {
                 this.$axios({
                     method: 'post',
@@ -115,6 +100,65 @@
                     error.response.status === 401 ? this.errors.push('Неверный логин или пароль') : this.errors.push('Ошибка авторизации');
                     return false;
                 });
+            },
+            checkForm: function () {
+                if (this.nameValid && this.passwordValid && this.confirmValid) {
+                    if (this.action === 'register') {
+                        if (this.registerRequest()) {
+                            this.loginRequest();
+                        }
+                    }
+                    else if (this.action === 'login') {
+                        this.loginRequest();
+                    }
+                }
+            },
+            validateInput: function (event) {
+                switch (event.target.id) {
+                    case 'name':
+                        if (!this.name) {
+                            this.nameValid = false;
+                            this.errors.name = 'Укажите имя';
+                        } else if (!this.name.match(/^[A-Za-z0-9]*$/)) {
+                            this.nameValid = false;
+                            this.errors.name = 'Только латинские буквы и цифры';
+                        } else {
+                            this.nameValid = true;
+                        }
+                        break;
+                    case 'password':
+                        if (!this.password) {
+                            this.passwordValid = false;
+                            this.errors.password = 'Укажите пароль';
+                        } else if (!this.password.match(/^[A-Za-z0-9]*$/)) {
+                            this.passwordValid = false;
+                            this.errors.password = 'Только латинские буквы и цифры';
+                        } else {
+                            this.passwordValid = true;
+                            if (this.passwordConfirm) {
+                                if (this.password !== this.passwordConfirm) {
+                                    this.confirmValid = false;
+                                    this.errors.passwordConfirm = 'Пароли не совпадают';
+                                } else {
+                                    this.confirmValid = true;
+                                }
+                            }
+                        }
+                        break;
+                    case 'confirm':
+                        if (!this.passwordConfirm) {
+                            this.confirmValid = false;
+                            this.errors.passwordConfirm = 'Укажите пароль еще раз';
+                        }
+                        else if (this.password !== this.passwordConfirm) {
+                            this.confirmValid = false;
+                            this.errors.passwordConfirm = 'Пароли не совпадают';
+                        }
+                        else {
+                            this.confirmValid = true;
+                        }
+                        break;
+                }
             }
         }
     }
@@ -166,8 +210,10 @@
     }
 
     form {
-        width: 450px;
-        margin: 150px auto 0 auto;
+        max-width: 450px;
+        width: 100%;
+        min-width: 180px;
+        margin: 0 15px;
     }
 
     input[type=radio] {
@@ -200,12 +246,11 @@
     input[type=text],
     input[type=password] {
         background: #fff;
-        border: none;
+        border: 1px solid #fff;
         border-radius: 8px;
         font-size: 16px;
-        height: 48px;
-        width: 99.5%;
-        margin-bottom: 10px;
+        height: 46px;
+        width: 99.6%;
         opacity: 1;
         text-indent: 20px;
         transition: all .2s ease-in-out;
@@ -245,5 +290,54 @@
         border-right: 10px solid transparent;
         position: relative;
         left: 32px;
+    }
+
+    .warning {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .warning > span {
+        visibility: hidden;
+        position: absolute;
+        right: 16px;
+        width: 1rem;
+        height: 1rem;
+        background: url("../assets/warning.svg") no-repeat;
+        background-size: 1rem;
+        transition: opacity 0.5s ease;
+        transform-style: preserve-3d;
+    }
+
+    .warning > span::after {
+        content: attr(data-validate);
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+        right: -5px;
+        top: 50%;
+        padding: 0 28px 0 4px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #c80000;
+        white-space: nowrap;
+        transform: translateY(-50%) translateZ(-1px);
+        transition: opacity .2s;
+    }
+
+    .invalid span {
+        visibility: visible !important;
+        opacity: 1;
+    }
+
+    .invalid input {
+        border-color: #c80000;
+    }
+
+    .invalid:hover span::after {
+        visibility: visible;
+        opacity: 1;
     }
 </style>
