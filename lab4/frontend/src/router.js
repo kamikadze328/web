@@ -10,7 +10,16 @@ const router = new Router({
     routes: [
         {
             path: UrlOnHelios,
-            component: Home
+            component: Home,
+            beforeEnter: (to, from, next) => {
+                if (localStorage.getItem('currentUser')) {
+                    next({
+                        path: '/main'
+                    })
+                } else {
+                    next();
+                }
+            }
         },
         {
             path: '/main',
@@ -21,6 +30,10 @@ const router = new Router({
         },
         {
             path: '*',
+            redirect: UrlOnHelios
+        },
+        {
+            path: '/*',
             redirect: UrlOnHelios
         }
     ]

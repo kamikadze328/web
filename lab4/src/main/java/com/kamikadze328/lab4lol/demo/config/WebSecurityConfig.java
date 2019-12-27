@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 .authorizeRequests()
                 .antMatchers("/register", "/login", "/logout", "/", "/css/**", "/js/**", "/img/**").permitAll()
                 .anyRequest().authenticated().and()
-                //.formLogin().loginPage("http://localhost:8082/").permitAll().and()
+                .formLogin().loginPage("http://localhost:13083/").permitAll().and()
                 .logout().permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST")).and()
                 .httpBasic().and()
