@@ -29,10 +29,10 @@
                 Создать аккаунт
                 </span>
             </button>
-            <div class="login-error" v-if="errors.length">
-                <p v-for="error in errors" v-bind:key="error" class="red">{{error}}</p>
+            <div class="login-error" v-if="errorRequest">
+                <p class="red">{{errorRequest}}</p>
             </div>
-            <div class="login-error" v-else>
+            <div class="login-error" v-if="success">
                 <p class="green">{{success}}</p>
             </div>
         </form>
@@ -52,6 +52,7 @@
                     passwordConfirm: ''
                 },
                 success: '',
+                errorRequest: '',
                 name: null,
                 password: null,
                 passwordConfirm: null,
@@ -79,10 +80,10 @@
                     }
                 }).then(() => {
                     this.success = 'Аккаунт успешно создан!';
+                    this.errorRequest = '';
                     return true;
                 }).catch(error => {
-                    error.response.status === 409 ? this.errors.push('Имя пользователя занято') : this.errors.push('Ошибка регистрации');
-                    return false;
+                    error.response.status === 409 ? this.errorRequest = 'Имя пользователя занято' : this.errorRequest = 'Ошибка регистрации';
                 });
             },
             loginRequest: function () {
@@ -92,13 +93,15 @@
                     url: this.$BaseURL + this.action,
                     headers: {'Content_type': 'application/json', 'Authorization':  base64Credential}
                 }).then(response => {
-                    this.response = response;
-                    localStorage.setItem('currentUser', base64Credential);
-                    this.$router.push('/main');
-                    return true;
-                }).catch(error => {
-                    error.response.status === 401 ? this.errors.push('Неверный логин или пароль') : this.errors.push('Ошибка авторизации');
-                    return false;
+                    if (response.status === 302) {
+                        this.errorRequest = 'Неверный логин или пароль';
+                    } else {
+                        this.response = response;
+                        localStorage.setItem('currentUser', base64Credential);
+                        this.$router.push('/main');
+                    }
+                }).catch(() => {
+                    this.errorRequest = 'Неверный логин или пароль';
                 });
             },
             checkForm: function () {

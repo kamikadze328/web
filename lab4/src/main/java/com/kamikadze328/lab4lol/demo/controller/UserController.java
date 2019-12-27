@@ -58,6 +58,7 @@ public class UserController {
             name = principal.getName();
             logger.info("user logged " + name);
         }else {
+            logger.info("warn");
             return new ResponseEntity<>("Wrong username or password", HttpStatus.UNAUTHORIZED);
         }
         return new ResponseEntity<>(name, HttpStatus.OK);

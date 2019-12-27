@@ -65,12 +65,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
         http.cors().and()
                 .authorizeRequests()
                 .antMatchers("/register", "/login", "/logout",
-                        "/css/**", "/js/**", "/img/**", "/")
+                        "/css/**", "/js/**", "/img/**")
 
                 .permitAll()
-                .anyRequest().authenticated().and()
-                //.formLogin().loginPage("http://localhost:13083/").permitAll().and()
-                .logout().permitAll()
+                .anyRequest().fullyAuthenticated().and()
+                .formLogin().loginPage("/").permitAll().and()
+                .logout()
+                .permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST")).and()
                 .httpBasic().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()
