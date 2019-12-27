@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from '@/views/Home'
 
 Vue.use(Router);
-let UrlOnHelios = '/~s264434/lab4/';
+let UrlOnHelios = '/';
 
 const router = new Router({
     mode: 'history',

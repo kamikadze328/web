@@ -170,7 +170,7 @@
             // Возможно избавиться
             checkArea: function (x, y, r) {
                 return (((x >= -r/2 && x <= 0 && y <= r && y >= 0)
-                    || ((y >= -(x + r)) && y <= 0 && x <= 0)
+                    || ((y >= -x - r) && y <= 0 && x <= 0)
                     || ((x*x + y*y) <= r*r/4 && x >= 0 && y <= 0)));
             },
             drawGraph: function () {
