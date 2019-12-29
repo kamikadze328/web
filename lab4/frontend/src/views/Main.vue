@@ -43,26 +43,26 @@
 
                 <table class="results">
                     <thead>
-                        <tr>
-                            <th>X</th>
-                            <th>Y</th>
-                            <th>R</th>
-                            <th>Попадание</th>
-                        </tr>
+                    <tr>
+                        <th>X</th>
+                        <th>Y</th>
+                        <th>R</th>
+                        <th>Попадание</th>
+                    </tr>
                     </thead>
                     <tbody v-if="listOfPoints.length">
-                        <tr v-for="cPoint in listOfPoints">
-                            <td>{{cPoint.x}}</td>
-                            <td>{{cPoint.y}}</td>
-                            <td>{{cPoint.r}}</td>
-                            <td v-if="cPoint.result" class="green">Входит</td>
-                            <td v-else class="red">Не входит</td>
-                        </tr>
+                    <tr v-for="cPoint in listOfPoints">
+                        <td>{{cPoint.x}}</td>
+                        <td>{{cPoint.y}}</td>
+                        <td>{{cPoint.r}}</td>
+                        <td v-if="cPoint.result" class="green">Входит</td>
+                        <td v-else class="red">Не входит</td>
+                    </tr>
                     </tbody>
                     <tbody v-else>
-                        <tr>
-                            <td colspan="4">Нет данных</td>
-                        </tr>
+                    <tr>
+                        <td colspan="4">Нет данных</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -91,8 +91,8 @@
                 let base64Credential = localStorage.getItem('currentUser');
                 this.$axios({
                     method: 'post',
-                    url: this.$BaseURL + 'login',
-                    headers: {'Content_type': 'application/json', 'Authorization': base64Credential}
+                    url: this.$BaseURL + 'logout'
+                    //headers: {'Content_type': 'application/json', 'Authorization': base64Credential}
                 }).then(response => {
                     this.response = response;
                     localStorage.removeItem('currentUser');
@@ -449,8 +449,8 @@
     /* ====== Table ====== */
 
     /*.table-wrapper {*/
-        /*display: flex;*/
-        /*flex-grow: 1;*/
+    /*display: flex;*/
+    /*flex-grow: 1;*/
     /*}*/
 
     .results {

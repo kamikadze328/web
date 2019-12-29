@@ -3,13 +3,13 @@ import Router from 'vue-router'
 import Home from '@/views/Home'
 
 Vue.use(Router);
-let urlOnHelios = '/';
+let UrlOnHelios = '/';
 
 const router = new Router({
     mode: 'history',
     routes: [
         {
-            path: urlOnHelios,
+            path: UrlOnHelios,
             component: Home,
             beforeEnter: (to, from, next) => {
                 if (localStorage.getItem('currentUser')) {
@@ -25,16 +25,16 @@ const router = new Router({
             path: '/main',
             component: () => import('./views/Main.vue'),
             meta: {
-                 requiresAuth: true
+                requiresAuth: true
             }
-        }/*,
+        },
         {
             path: '*',
-            redirect: urlOnHelios
-        }*//*,
+            redirect: UrlOnHelios
+        }/*,
         {
             path: '/!*',
-            redirect: urlOnHelios
+            redirect: UrlOnHelios
         }*/
     ]
 });
@@ -43,7 +43,9 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!localStorage.getItem('currentUser')) {
             next({
-                path: urlOnHelios
+                path: ()=>{
+                    router.go(-1)
+                }
             })
         } else {
             next();
