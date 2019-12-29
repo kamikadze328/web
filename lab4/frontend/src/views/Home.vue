@@ -29,10 +29,10 @@
                 Создать аккаунт
                 </span>
             </button>
-            <div class="login-error" v-if="errorRequest">
-                <p class="red">{{errorRequest}}</p>
+            <div class="login-error" v-if="errors.length">
+                <p v-for="error in errors" v-bind:key="error" class="red">{{error}}</p>
             </div>
-            <div class="login-error" v-if="success">
+            <div class="login-error" v-else>
                 <p class="green">{{success}}</p>
             </div>
         </form>
@@ -52,7 +52,6 @@
                     passwordConfirm: ''
                 },
                 success: '',
-                errorRequest: '',
                 name: null,
                 password: null,
                 passwordConfirm: null,
@@ -73,17 +72,17 @@
                 this.$axios({
                     method: 'post',
                     url: this.$BaseURL + this.action,
-                    headers: {'Content_type': 'application/json'},
+                    headers: {'Content-Type': 'application/json'},
                     data: {
                         username: this.name,
                         password: this.password
                     }
                 }).then(() => {
                     this.success = 'Аккаунт успешно создан!';
-                    this.errorRequest = '';
                     return true;
                 }).catch(error => {
-                    error.response.status === 409 ? this.errorRequest = 'Имя пользователя занято' : this.errorRequest = 'Ошибка регистрации';
+                    error.response.status === 409 ? this.errors.push('Имя пользователя занято') : this.errors.push('Ошибка регистрации');
+                    return false;
                 });
             },
             loginRequest: function () {
@@ -91,17 +90,16 @@
                 this.$axios({
                     method: 'post',
                     url: this.$BaseURL + this.action,
-                    headers: {'Content_type': 'application/json', 'Authorization':  base64Credential}
+                    headers: {'Accept': 'application/json', 'Authorization':  base64Credential},
+                    timeout : 10 //new
                 }).then(response => {
-                    if (response.status === 302) {
-                        this.errorRequest = 'Неверный логин или пароль';
-                    } else {
-                        this.response = response;
-                        localStorage.setItem('currentUser', base64Credential);
-                        this.$router.push('/main');
-                    }
-                }).catch(() => {
-                    this.errorRequest = 'Неверный логин или пароль';
+                    this.response = response;
+                    localStorage.setItem('currentUser', base64Credential);
+                    this.$router.push('/main');
+                    return true;
+                }).catch(error => {
+                    error.response.status === 401 ? this.errors.push('Неверный логин или пароль') : this.errors.push('Ошибка авторизации');
+                    return false;
                 });
             },
             checkForm: function () {

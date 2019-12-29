@@ -91,8 +91,8 @@
                 let base64Credential = localStorage.getItem('currentUser');
                 this.$axios({
                     method: 'post',
-                    url: this.$BaseURL + 'logout'
-                    //headers: {'Content_type': 'application/json', 'Authorization': base64Credential}
+                    url: this.$BaseURL + 'login',
+                    headers: {'Content_type': 'application/json', 'Authorization': base64Credential}
                 }).then(response => {
                     this.response = response;
                     localStorage.removeItem('currentUser');
