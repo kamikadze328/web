@@ -44,7 +44,7 @@ public class UserController {
                         HttpStatus.CONFLICT);
             }
 
-            logger.info("user registered " + newUser.getUsername());
+            logger.info("user registered " + newUser.getUsername()+" !!!!!!!!!!!!!!!!11");
 
             return new ResponseEntity<>(userService.save(newUser), HttpStatus.CREATED);
         }
@@ -58,7 +58,7 @@ public class UserController {
             name = principal.getName();
             logger.info("user logged " + name);
         }else {
-            logger.info("warn");
+            logger.info("Wrong username or password");
             return new ResponseEntity<>("Wrong username or password", HttpStatus.UNAUTHORIZED);
         }
         return new ResponseEntity<>(name, HttpStatus.OK);
