@@ -1,6 +1,6 @@
 <template>
     <div class="form-wrapper">
-        <form v-on:submit.prevent="checkForm">
+        <form class="login-form" v-on:submit.prevent="checkForm">
             <input v-model="action" checked="" id="signin" name="action" type="radio" value="login">
             <label for="signin">Вход</label>
             <input v-model="action" id="signup" name="action" type="radio" value="register">
@@ -8,15 +8,15 @@
             <div id="wrapper">
                 <div id="arrow"></div>
                 <div :class="{'invalid':!nameValid}" class="warning">
-                    <input v-model="name" @change="validateInput" minlength="3" maxlength="25" id="name" placeholder="Имя" type="text">
+                    <input v-model="name" minlength="3" maxlength="25" id="name" placeholder="Имя" type="text">
                     <span :data-validate="errors.name"></span>
                 </div>
                 <div :class="{'invalid':!passwordValid}" class="warning">
-                    <input v-model="password" @change="validateInput" minlength="3" maxlength="25" id="password" placeholder="Пароль" type="password">
+                    <input v-model="password" minlength="3" maxlength="25" id="password" placeholder="Пароль" type="password">
                     <span :data-validate="errors.password"></span>
                 </div>
                 <div :class="{'invalid':!confirmValid}" class="warning">
-                    <input v-model="passwordConfirm" @change="validateInput" minlength="3" maxlength="25" id="confirm" placeholder="Повторите пароль" type="password">
+                    <input v-model="passwordConfirm" minlength="3" maxlength="25" id="confirm" placeholder="Повторите пароль" type="password">
                     <span :data-validate="errors.passwordConfirm"></span>
                 </div>
             </div>
@@ -29,11 +29,8 @@
                 Создать аккаунт
                 </span>
             </button>
-            <div class="login-error" v-if="errorRequest">
-                <p class="red">{{errorRequest}}</p>
-            </div>
-            <div class="login-error" v-if="success">
-                <p class="green">{{success}}</p>
+            <div class="response-message">
+                <p :class="[(response.status >= 200 && response.status < 300) ? 'green' : 'red']" class="visible">{{response.message}}</p>
             </div>
         </form>
     </div>
@@ -44,15 +41,17 @@
         name: "Home",
         data() {
             return {
-                response: null,
                 action: 'login',
                 errors: {
                     name: '',
                     password: '',
                     passwordConfirm: ''
                 },
+                response: {
+                    status: null,
+                    message: ''
+                },
                 success: '',
-                errorRequest: '',
                 name: null,
                 password: null,
                 passwordConfirm: null,
@@ -73,48 +72,80 @@
                 this.$axios({
                     method: 'post',
                     url: this.$BaseURL + this.action,
-//                    headers: {'Content_type': 'application/json'},
+                    headers: {'Content-Type': 'application/json'},
                     data: {
                         username: this.name,
                         password: this.password
                     }
-                }).then(() => {
-                    this.success = 'Аккаунт успешно создан!';
-                    this.errorRequest = '';
-                    return true;
+                }).then((response) => {
+                    this.response = {status: response.status, message: 'Аккаунт успешно создан!'};
                 }).catch(error => {
-                    error.response.status === 409 ? this.errorRequest = 'Имя пользователя занято' : this.errorRequest = 'Ошибка регистрации';
+                    this.response.status = error.response.status;
+                    error.response.status === 409 ? this.response.message = 'Имя пользователя занято' : this.response.message = 'Ошибка регистрации';
+                }).finally(() => {
+                    this.updateMessage();
                 });
             },
             loginRequest: function () {
-                let base64Credential = 'Basic ' + btoa(this.name + ':' + this.password);
                 this.$axios({
                     timeout: 500,
                     method: 'post',
                     url: this.$BaseURL + this.action,
-                    headers: {'Accept': 'application/json', 'Authorization':  base64Credential}
-                }).then(response => {
-                    if (response.status === 302) {
-                        this.success ='';
-                        this.errorRequest = 'Неверный логин или пароль';
-                    } else {
-                        this.response = response;
-                        localStorage.setItem('currentUser', base64Credential);
-                        this.$router.push('/main');
+                    auth:{
+                        username: this.name,
+                        password : this.password
                     }
-                }).catch(() => {
-                    this.success ='';
-                    this.errorRequest = 'Неверный логин или пароль';
-                });
+                }).then(() => {
+                    let base64Credential = 'Basic ' + btoa(this.name + ':' + this.password);
+                    localStorage.setItem('currentUser', base64Credential);
+                    this.$router.push('/main');
+                }).catch(error => {
+                    if (error.response == null) {
+                        this.response = {status: 401, message: 'Неверный логин или пароль'};
+                    } else {
+                        this.response.status = error.response.status;
+                        error.response.status === 401 ? this.response.message = 'Неверный логин или пароль' : this.response.message = 'Ошибка авторизации';
+                    }
+                })
             },
             checkForm: function () {
-                if (this.nameValid && this.passwordValid && this.confirmValid) {
-                    if (this.action === 'register') {
-                        if (this.registerRequest()) {
-                            this.loginRequest();
-                        }
+                if (!this.name) {
+                    this.nameValid = false;
+                    this.errors.name = 'Укажите имя';
+                } else if (!this.name.match(/^[A-Za-z0-9]*$/)) {
+                    this.nameValid = false;
+                    this.errors.name = 'Только латинские буквы и цифры';
+                } else {
+                    this.nameValid = true;
+                }
+
+                if (!this.password) {
+                    this.passwordValid = false;
+                    this.errors.password = 'Укажите пароль';
+                } else if (!this.password.match(/^[A-Za-z0-9]*$/)) {
+                    this.passwordValid = false;
+                    this.errors.password = 'Только латинские буквы и цифры';
+                } else {
+                    this.passwordValid = true;
+                }
+
+                if (!this.passwordConfirm) {
+                    this.confirmValid = false;
+                    this.errors.passwordConfirm = 'Укажите пароль еще раз';
+                } else if (this.password !== this.passwordConfirm) {
+                    this.confirmValid = false;
+                    this.errors.passwordConfirm = 'Пароли не совпадают';
+                } else {
+                    this.confirmValid = true;
+                }
+
+                if (this.action === 'register') {
+                    if (this.nameValid && this.passwordValid && this.confirmValid) {
+                        this.registerRequest()
                     }
-                    else if (this.action === 'login') {
+                }
+                else if (this.action === 'login') {
+                    if (this.nameValid && this.passwordValid) {
                         this.loginRequest();
                     }
                 }
@@ -165,6 +196,11 @@
                         }
                         break;
                 }
+            }, //Анимация появления сообщения
+            updateMessage() {
+                const elem = document.querySelector('.response-message p');
+                elem.classList.toggle('visible');
+                setTimeout(() => elem.classList.toggle('visible'), 150);
             }
         }
     }
@@ -298,6 +334,10 @@
         left: 32px;
     }
 
+    .login-form {
+        position: relative;
+    }
+
     .warning {
         position: relative;
         display: flex;
@@ -345,5 +385,21 @@
     .invalid:hover span::after {
         visibility: visible;
         opacity: 1;
+    }
+
+    .response-message {
+        position: absolute;
+        bottom: -20px;
+    }
+
+    .response-message p {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .15s;
+    }
+
+    .visible {
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 </style>
