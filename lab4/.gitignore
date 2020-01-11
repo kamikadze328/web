@@ -2,7 +2,6 @@ HELP.md
 target/
 out/
 !**/src/main/**
-.mvn/
 
 ### STS ###
 .apt_generated
@@ -37,3 +36,4 @@ build/
 /src/main/resources/static/favicon.ico
 /src/main/resources/static/index.html
 /.mvn/
+/.mvn/wrapper/
