@@ -37,3 +37,7 @@ build/
 /src/main/resources/static/index.html
 /.mvn/
 /.mvn/wrapper/
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+.mvn/wrapper/MavenWrapperDownloader.java
+
