@@ -30,3 +30,11 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/main/resources/static/css/
+/src/main/resources/static/css/app.b7a10c7e.css
+/src/main/resources/static/css/chunk-9e6b4076.69e27815.css
+/src/main/resources/static/img/
+/src/main/resources/static/js/
+/src/main/resources/static/favicon.ico
+/src/main/resources/static/index.html
+/.mvn/
