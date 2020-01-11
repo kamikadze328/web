@@ -2,6 +2,7 @@ HELP.md
 target/
 out/
 !**/src/main/**
+Лаба4.docx
 
 ### STS ###
 .apt_generated
