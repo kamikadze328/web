@@ -1,4 +1,4 @@
-package com.kamikadze328.lab4lol.demo;
+package com.kamikadze328.lab4;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

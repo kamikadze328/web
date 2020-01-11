@@ -1,7 +1,7 @@
-package com.kamikadze328.lab4lol.demo.controller;
+package com.kamikadze328.lab4.controller;
 
-import com.kamikadze328.lab4lol.demo.model.data.User;
-import com.kamikadze328.lab4lol.demo.service.UserService;
+import com.kamikadze328.lab4.model.data.User;
+import com.kamikadze328.lab4.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.security.Principal;
 import java.util.regex.Pattern;
 

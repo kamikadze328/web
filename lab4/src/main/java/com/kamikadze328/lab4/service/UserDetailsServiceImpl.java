@@ -1,7 +1,7 @@
-package com.kamikadze328.lab4lol.demo.service;
+package com.kamikadze328.lab4.service;
 
-import com.kamikadze328.lab4lol.demo.model.data.User;
-import com.kamikadze328.lab4lol.demo.repositories.UserRepository;
+import com.kamikadze328.lab4.model.data.User;
+import com.kamikadze328.lab4.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

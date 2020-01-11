@@ -1,4 +1,4 @@
-package com.kamikadze328.lab4lol.demo.controller;
+package com.kamikadze328.lab4.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

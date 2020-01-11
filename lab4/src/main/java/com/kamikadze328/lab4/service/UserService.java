@@ -1,6 +1,6 @@
-package com.kamikadze328.lab4lol.demo.service;
+package com.kamikadze328.lab4.service;
 
-import com.kamikadze328.lab4lol.demo.model.data.User;
+import com.kamikadze328.lab4.model.data.User;
 
 public interface UserService {
     User save(User user);

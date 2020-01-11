@@ -1,7 +1,7 @@
-package com.kamikadze328.lab4lol.demo.repositories;
+package com.kamikadze328.lab4.repositories;
 
-import com.kamikadze328.lab4lol.demo.model.data.Point;
-import com.kamikadze328.lab4lol.demo.model.data.User;
+import com.kamikadze328.lab4.model.data.Point;
+import com.kamikadze328.lab4.model.data.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

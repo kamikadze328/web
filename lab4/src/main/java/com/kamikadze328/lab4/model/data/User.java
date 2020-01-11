@@ -1,4 +1,4 @@
-package com.kamikadze328.lab4lol.demo.model.data;
+package com.kamikadze328.lab4.model.data;
 
 import lombok.Data;
 

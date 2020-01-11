@@ -1,4 +1,4 @@
-package com.kamikadze328.lab4lol.demo.config;
+package com.kamikadze328.lab4.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -66,21 +65,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
         http.cors().and()
                 .authorizeRequests()
                 .antMatchers("/register", "/login", "/logout",
-                        "/css/**", "/js/**", "/img/**").permitAll()
-                .anyRequest().fullyAuthenticated().and()
-                .formLogin().loginPage("/")
-                .failureHandler(authenticationFailureHandler()).permitAll().and()
+                        "/css/**", "/js/**", "/img/**", "/", "/error").permitAll()
+                .anyRequest().authenticated().and()
+                //.formLogin().loginPage("/").permitAll().and()
                 .logout().permitAll()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST")).and()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST")).logoutSuccessUrl("/").and()
                 .httpBasic().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()
                 .csrf().disable();
     }
-
-    @Bean
-    public AuthenticationFailureHandler authenticationFailureHandler() {
-        return new CustomAuthenticationFailureHandler();
-    }
-
-
 }

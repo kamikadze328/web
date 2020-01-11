@@ -1,7 +1,6 @@
-package com.kamikadze328.lab4lol.demo.model;
+package com.kamikadze328.lab4.model;
 
-import com.kamikadze328.lab4lol.demo.model.data.Point;
-import com.kamikadze328.lab4lol.demo.model.data.PointForClient;
+import com.kamikadze328.lab4.model.data.Point;
 import org.springframework.stereotype.Component;
 
 @Component

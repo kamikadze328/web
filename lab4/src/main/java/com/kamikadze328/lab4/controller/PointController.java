@@ -1,10 +1,10 @@
-package com.kamikadze328.lab4lol.demo.controller;
+package com.kamikadze328.lab4.controller;
 
-import com.kamikadze328.lab4lol.demo.model.Graphic;
-import com.kamikadze328.lab4lol.demo.model.data.Point;
-import com.kamikadze328.lab4lol.demo.model.data.PointForClient;
-import com.kamikadze328.lab4lol.demo.repositories.PointRepository;
-import com.kamikadze328.lab4lol.demo.repositories.UserRepository;
+import com.kamikadze328.lab4.model.Graphic;
+import com.kamikadze328.lab4.model.PointForClient;
+import com.kamikadze328.lab4.model.data.Point;
+import com.kamikadze328.lab4.repositories.PointRepository;
+import com.kamikadze328.lab4.repositories.UserRepository;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

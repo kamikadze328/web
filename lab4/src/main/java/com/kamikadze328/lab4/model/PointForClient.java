@@ -1,9 +1,7 @@
-package com.kamikadze328.lab4lol.demo.model.data;
+package com.kamikadze328.lab4.model;
 
 import lombok.Data;
 
-//Это долдно быть компонентом
-//Вообще непонятно, зачем тут @Data стоит...
 @Data
 public class PointForClient {
     private Double x;

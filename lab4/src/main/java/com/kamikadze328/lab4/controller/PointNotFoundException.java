@@ -1,4 +1,4 @@
-package com.kamikadze328.lab4lol.demo.controller;
+package com.kamikadze328.lab4.controller;
 
 public class PointNotFoundException extends RuntimeException {
     PointNotFoundException(Long id) {

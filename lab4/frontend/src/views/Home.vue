@@ -73,7 +73,7 @@
                 this.$axios({
                     method: 'post',
                     url: this.$BaseURL + this.action,
-                    headers: {'Content_type': 'application/json'},
+//                    headers: {'Content_type': 'application/json'},
                     data: {
                         username: this.name,
                         password: this.password
@@ -89,11 +89,13 @@
             loginRequest: function () {
                 let base64Credential = 'Basic ' + btoa(this.name + ':' + this.password);
                 this.$axios({
+                    timeout: 500,
                     method: 'post',
                     url: this.$BaseURL + this.action,
-                    headers: {'Content_type': 'application/json', 'Authorization':  base64Credential}
+                    headers: {'Accept': 'application/json', 'Authorization':  base64Credential}
                 }).then(response => {
                     if (response.status === 302) {
+                        this.success ='';
                         this.errorRequest = 'Неверный логин или пароль';
                     } else {
                         this.response = response;
@@ -101,6 +103,7 @@
                         this.$router.push('/main');
                     }
                 }).catch(() => {
+                    this.success ='';
                     this.errorRequest = 'Неверный логин или пароль';
                 });
             },
