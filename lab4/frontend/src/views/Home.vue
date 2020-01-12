@@ -88,7 +88,7 @@
             },
             loginRequest: function () {
                 this.$axios({
-                    timeout: 500,
+                    timeout: 550,
                     method: 'post',
                     url: this.$BaseURL + this.action,
                     auth:{
