@@ -48,9 +48,10 @@ public class PointController {
     // ...
     // Dd - информация о четвёртой четверти
     // Первое число в паре (A) - форма фигуры.
-    //0, 1, 2, и др.
+    //0, 1, 2, и др. - более подробно в классе Graphic
     // Второе число - размер.
     // 1- маленький, 2 - большой.
+
     @CrossOrigin
     @PostMapping("/points")
     PointForClient newPoint(@RequestBody PointFromClient pointFromClient, Principal user) {
