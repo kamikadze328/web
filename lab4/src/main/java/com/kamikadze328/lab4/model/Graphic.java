@@ -1,22 +1,80 @@
 package com.kamikadze328.lab4.model;
 
-import com.kamikadze328.lab4.model.data.Point;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Graphic {
-    private boolean isInArea(double x, double y, double r) {
-        boolean square = x >= -r / 2.0 && x <= 0 && y <= r && y >= 0;
-        boolean triangle = (y >= -(x + r)) && y <= 0 && x <= 0;
-        boolean sector = (x * x + y * y) <= r * r / 4.0 && x >= 0 && y <= 0;
-        return triangle || square || sector;
+
+    //entry point
+    public boolean isInArea(PointFromClient point) {
+        String data = point.getData();
+        int quadrantOfPoint = getQuadrantOfPoint(point.getX(), point.getY());
+        switch (quadrantOfPoint) {
+            case 1:
+                point.setData(data.substring(0, 2));
+                break;
+            case 2:
+                point.setData(data.substring(2, 4));
+                break;
+            case 3:
+                point.setData(data.substring(4, 6));
+                break;
+            case 4:
+                point.setData(data.substring(6, 8));
+                break;
+        }
+
+        return  getFigure(quadrantOfPoint, point);
     }
 
-    public boolean isInArea(Point point) {
-        return isInArea(point.getX(), point.getY(), point.getR());
-    }
-    public boolean isInArea(PointForClient point) {
-        return isInArea(point.getX(), point.getY(), point.getR());
+    private int getQuadrantOfPoint(double x, double y) {
+        if (x >= 0 && y >= 0)
+            return 1;
+        else if (x <= 0 && y >= 0)
+            return 2;
+        else if (x <= 0 && y <= 0)
+            return 3;
+        else if (x >= 0 && y <= 0)
+            return 4;
+        else return -1;
     }
 
+    private boolean getFigure(int quadrant, PointFromClient point){
+        int typeOfFigure = Integer.parseInt(point.getData().substring(0,1));
+        int sizeOfFigure = Integer.parseInt(point.getData().substring(1,2));
+        double r = point.getR() * sizeOfFigure / 2;
+        switch (typeOfFigure){
+            case 0:
+                return false;
+            case 1:
+                return getSquare(point.getX(), point.getY(), r);
+            case 2:
+                return getTriangle(point.getX(), point.getY(), r);
+            case 3:
+                return getSector(point.getX(), point.getY(), r);
+        }
+        return false;
+    }
+
+    //      ___
+    //     |   |
+    //     |   |
+    //     |___|
+    //Тут тоже проверяется вхождение в целиковую фигуру
+    private boolean getSquare(double x, double y, double r) {
+        return Math.abs(x+y/2) + Math.abs(x-y/2) <= r;
+    }
+
+    //На самом деле здесь проверяется вхождения в ромб.
+    //Так как нужную четверть мы уже определили
+    // и работаем только в ней
+    private boolean getTriangle(double x, double y, double r){
+        return Math.abs(x) + Math.abs(y)<= r;
+    }
+
+    //И тут вхождение в целиковую фигуру
+    private boolean getSector(double x, double y, double r){
+        return Math.pow(x, 2) + Math.pow(y, 2) <= Math.pow(r, 2);
+
+    }
 }

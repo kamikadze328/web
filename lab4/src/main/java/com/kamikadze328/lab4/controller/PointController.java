@@ -2,6 +2,7 @@ package com.kamikadze328.lab4.controller;
 
 import com.kamikadze328.lab4.model.Graphic;
 import com.kamikadze328.lab4.model.PointForClient;
+import com.kamikadze328.lab4.model.PointFromClient;
 import com.kamikadze328.lab4.model.data.Point;
 import com.kamikadze328.lab4.repositories.PointRepository;
 import com.kamikadze328.lab4.repositories.UserRepository;
@@ -42,8 +43,12 @@ public class PointController {
 
     @CrossOrigin
     @PostMapping("/points")
-    PointForClient newPoint(@RequestBody Point newPoint, Principal user) {
-        newPoint.setResult(graphic.isInArea(newPoint));
+    PointForClient newPoint(@RequestBody PointFromClient pointFromClient, Principal user) {
+        Point newPoint = new Point();
+        newPoint.setX(pointFromClient.getX());
+        newPoint.setY(pointFromClient.getY());
+        newPoint.setR(pointFromClient.getR());
+        newPoint.setResult(graphic.isInArea(pointFromClient));
         newPoint.setUser(userRepository.findByUsername(user.getName()));
         Point p = pointRepository.save(newPoint);
         return new PointForClient(p.getX(), p.getY(), p.getR(), p.getResult());
