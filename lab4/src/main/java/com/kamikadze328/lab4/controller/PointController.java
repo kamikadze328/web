@@ -41,6 +41,16 @@ public class PointController {
         return pointsForClient;
     }
 
+
+    //В поле data PointFromClient требуется передать строку вида AaBbCcDd,
+    // где все восемь знаков - это цифры
+    // где Aa - информация о первой четверти графика
+    // ...
+    // Dd - информация о четвёртой четверти
+    // Первое число в паре (A) - форма фигуры.
+    //0, 1, 2, и др.
+    // Второе число - размер.
+    // 1- маленький, 2 - большой.
     @CrossOrigin
     @PostMapping("/points")
     PointForClient newPoint(@RequestBody PointFromClient pointFromClient, Principal user) {
