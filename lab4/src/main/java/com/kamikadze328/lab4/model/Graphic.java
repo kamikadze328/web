@@ -22,6 +22,8 @@ public class Graphic {
             case 4:
                 point.setData(data.substring(6, 8));
                 break;
+            case -1:
+                return false;
         }
 
         return  getFigure(quadrantOfPoint, point);
