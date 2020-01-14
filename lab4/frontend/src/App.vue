@@ -2,7 +2,7 @@
 <div id="app">
     <div class="header">
         <div class="header-inner">
-            <div>Лукьяненко, Киселев, Р3210</div>
+            <div>Лукьяненко, Киселёв, Р3210</div>
             <a class="header-logo" href="https://se.ifmo.ru/courses/web">
                 <img crossorigin="anonymous" src="./assets/itmo_logo.png" alt="itmo logo">
             </a>
