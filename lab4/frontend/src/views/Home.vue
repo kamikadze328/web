@@ -88,7 +88,7 @@
             },
             loginRequest: function () {
                 this.$axios({
-                    timeout: 550,
+                    timeout: 500,
                     method: 'post',
                     url: this.$BaseURL + this.action,
                     auth:{
@@ -107,7 +107,7 @@
                         error.response.status === 401 ? this.response.message = 'Неверный логин или пароль' : this.response.message = 'Ошибка авторизации';
                     }
                     this.updateMessage();
-                })
+                });
             },
             checkForm: function () {
                 if (!this.name) {
@@ -151,53 +151,7 @@
                     }
                 }
             },
-            validateInput: function (event) {
-                switch (event.target.id) {
-                    case 'name':
-                        if (!this.name) {
-                            this.nameValid = false;
-                            this.errors.name = 'Укажите имя';
-                        } else if (!this.name.match(/^[A-Za-z0-9]*$/)) {
-                            this.nameValid = false;
-                            this.errors.name = 'Только латинские буквы и цифры';
-                        } else {
-                            this.nameValid = true;
-                        }
-                        break;
-                    case 'password':
-                        if (!this.password) {
-                            this.passwordValid = false;
-                            this.errors.password = 'Укажите пароль';
-                        } else if (!this.password.match(/^[A-Za-z0-9]*$/)) {
-                            this.passwordValid = false;
-                            this.errors.password = 'Только латинские буквы и цифры';
-                        } else {
-                            this.passwordValid = true;
-                            if (this.passwordConfirm) {
-                                if (this.password !== this.passwordConfirm) {
-                                    this.confirmValid = false;
-                                    this.errors.passwordConfirm = 'Пароли не совпадают';
-                                } else {
-                                    this.confirmValid = true;
-                                }
-                            }
-                        }
-                        break;
-                    case 'confirm':
-                        if (!this.passwordConfirm) {
-                            this.confirmValid = false;
-                            this.errors.passwordConfirm = 'Укажите пароль еще раз';
-                        }
-                        else if (this.password !== this.passwordConfirm) {
-                            this.confirmValid = false;
-                            this.errors.passwordConfirm = 'Пароли не совпадают';
-                        }
-                        else {
-                            this.confirmValid = true;
-                        }
-                        break;
-                }
-            }, //Анимация появления сообщения
+            //Анимация появления сообщения
             updateMessage() {
                 const elem = document.querySelector('.response-message p');
                 elem.classList.toggle('visible');

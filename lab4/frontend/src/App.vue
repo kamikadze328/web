@@ -68,6 +68,11 @@
         outline: 0;
     }
 
+    button {
+        background-color: transparent;
+        border: 0;
+    }
+
     .header {
         width: 100%;
         margin-bottom: 20px;
@@ -138,6 +143,19 @@
 
     .red {
         color: #E04E15;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-gray {
+        color: #949494;
+    }
+
+    .visible {
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 
     @media (max-width: 500px) {
