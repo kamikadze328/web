@@ -93,7 +93,7 @@
                     <form v-on:submit.prevent="addPoint">
                         <div class="form-select x-select">
                             <label class="selection-label">Выберите X
-                                <span :class="{'icon-visible':!xValid}" class="warning"
+                                <span :class="{'visible':!xValid}" class="warning"
                                       data-validate="Выберите X"></span>
                             </label>
                             <div class="select-buttons">
@@ -105,7 +105,7 @@
                         <div class="form-select y-select">
                             <!--suppress XmlInvalidId -->
                             <label class="selection-label" for="Y-select">Введите Y
-                                <span :class="{'icon-visible':!yValid}" class="warning"
+                                <span :class="{'visible':!yValid}" class="warning"
                                       data-validate="Y - значение в диапазоне [-3; 3]"></span>
                             </label>
                             <number-input v-model="y" @change="validateY" :step="0.001" :attrs="{id: 'Y-select'}"
@@ -114,7 +114,7 @@
                         </div>
                         <div class="form-select r-select">
                             <label class="selection-label">Выберите R
-                                <span :class="{'icon-visible':!rValid}" class="warning"
+                                <span :class="{'visible':!rValid}" class="warning"
                                       data-validate="R - положительное число"></span>
                             </label>
                             <div class="select-buttons">
@@ -238,7 +238,9 @@
             },
             addPointFromCanvas: function (e) {
                 const point = this.getPointCoordinates(e);
-                this.addPointRequest(point.x, point.y, this.r);
+                if (this.rValid) {
+                    this.addPointRequest(point.x, point.y, this.r);
+                }
             },
             addPoint: function () {
                 if (this.x == null) {
@@ -285,7 +287,6 @@
                 r = r * quad['size'];
                 switch (quad['figure']) {
                     case 'rect':
-                        let rect = Math.abs(x+y/2) + Math.abs(x-y/2);
                         return Math.abs(x+y/2) + Math.abs(x-y/2) <= r;
                     case 'triangle':
                         return Math.abs(x) + Math.abs(y) <= r;
@@ -305,7 +306,6 @@
                         const plot_canvas = document.querySelector(".quad" + quad);
                         const context = plot_canvas.getContext("2d");
                         let canvLength = plot_canvas.width;
-                        context.clearRect(0, 0, canvLength, canvLength);
                         context.beginPath();
                         switch (this.graph[quad]['figure']) {
                             case 'rect':
@@ -430,10 +430,17 @@
                         break;
                 }
             },
+            // Затираем все канвасы и рисуем заново
             reDrawGraph: function () {
                 const plot_canvas = document.getElementById("plot");
                 const context = plot_canvas.getContext('2d');
                 context.clearRect(0, 0, plot_canvas.width, plot_canvas.height);
+                for (let quad in this.graph) {
+                    const plot_canvas = document.querySelector(".quad" + quad);
+                    const context = plot_canvas.getContext("2d");
+                    let canvLength = plot_canvas.width;
+                    context.clearRect(0, 0, canvLength, canvLength);
+                }
                 this.drawGraph();
             },
             changeButton: function (event) {
@@ -507,7 +514,6 @@
     }
 
     .container {
-        /*box-shadow: 0 2px 10px rgba(59, 64, 69, 0.08);*/
         background-color: #fff;
         border-radius: 5px;
     }
@@ -814,7 +820,7 @@
         position: relative;
     }
 
-    .selection-label:hover .icon-visible::after {
+    .selection-label:hover span.visible::after {
         visibility: visible;
         opacity: 1;
     }
@@ -919,11 +925,6 @@
     }
 
     /* ====== Table ====== */
-
-    /*.table-wrapper {*/
-    /*display: flex;*/
-    /*flex-grow: 1;*/
-    /*}*/
 
     .results {
         flex-grow: 1;
