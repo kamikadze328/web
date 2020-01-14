@@ -6,8 +6,8 @@
                 <a href="/" v-on:click.prevent="logoutRequest" class="logout">Выйти</a>
             </div>
             <div class="content-wrapper">
-                <div class="graph-container">
-                    <div class="graph container">
+                <div class="graph-container container">
+                    <div class="graph">
                         <div class="figures">
                             <canvas class="figure quad2" width="150" height="150"></canvas>
                             <canvas class="figure quad1" width="150" height="150"></canvas>
@@ -516,6 +516,7 @@
     .container {
         background-color: #fff;
         border-radius: 5px;
+        box-shadow: 0 0 1px 1px hsla(0, 0%, 91%, 1);
     }
 
     .content-wrapper > *:not(:last-child) {
@@ -554,6 +555,8 @@
         position: relative;
         width: 300px;
         height: 300px;
+        background-color: #fff;
+        border-radius: 5px;
         z-index: 10;
     }
 
@@ -645,11 +648,10 @@
 
     .edit-form {
         position: absolute;
-        bottom: 0;
+        top: 120px;
         z-index: 1;
         width: 280px;
-        transform: translateY(0%);
-        transition: all 0.5s;
+        transition: top 0.5s;
     }
 
     .edit-form h3 {
@@ -801,7 +803,7 @@
     }
 
     .slide-down {
-        transform: translateY(105%)
+        top: 310px;
     }
 
     /* ====== Form ====== */
