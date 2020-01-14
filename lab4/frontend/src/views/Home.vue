@@ -106,6 +106,7 @@
                         this.response.status = error.response.status;
                         error.response.status === 401 ? this.response.message = 'Неверный логин или пароль' : this.response.message = 'Ошибка авторизации';
                     }
+                    this.updateMessage();
                 })
             },
             checkForm: function () {

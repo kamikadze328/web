@@ -7,26 +7,26 @@ public class Graphic {
 
     //entry point
     public boolean isInArea(PointFromClient point) {
-        String data = point.getData();
+        String data = point.getGraph();
         int quadrantOfPoint = getQuadrantOfPoint(point.getX(), point.getY());
         switch (quadrantOfPoint) {
             case 1:
-                point.setData(data.substring(0, 2));
+                point.setGraph(data.substring(0, 2));
                 break;
             case 2:
-                point.setData(data.substring(2, 4));
+                point.setGraph(data.substring(2, 4));
                 break;
             case 3:
-                point.setData(data.substring(4, 6));
+                point.setGraph(data.substring(4, 6));
                 break;
             case 4:
-                point.setData(data.substring(6, 8));
+                point.setGraph(data.substring(6, 8));
                 break;
             case -1:
                 return false;
         }
 
-        return  getFigure(quadrantOfPoint, point);
+        return getFigure(quadrantOfPoint, point);
     }
 
     private int getQuadrantOfPoint(double x, double y) {
@@ -42,8 +42,8 @@ public class Graphic {
     }
 
     private boolean getFigure(int quadrant, PointFromClient point){
-        int typeOfFigure = Integer.parseInt(point.getData().substring(0,1));
-        int sizeOfFigure = Integer.parseInt(point.getData().substring(1,2));
+        int typeOfFigure = Integer.parseInt(point.getGraph().substring(0,1));
+        int sizeOfFigure = Integer.parseInt(point.getGraph().substring(1,2));
         double r = point.getR() * sizeOfFigure / 2;
         switch (typeOfFigure){
             case 0:
