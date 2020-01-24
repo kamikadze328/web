@@ -91,7 +91,7 @@
                     timeout: 500,
                     method: 'post',
                     url: this.$BaseURL + this.action,
-                    auth:{
+                    auth: {
                         username: this.name,
                         password : this.password
                     }
