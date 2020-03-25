@@ -98,13 +98,13 @@
         width: calc(100% / 3);
     }
 
-    .header-inner > *:first-child {
+    /*.header-inner > *:first-child {
         text-align: left;
     }
 
     .header-inner > *:last-child {
         text-align: right;
-    }
+    }*/
 
     .header-logo {
         padding: 5px 0;
