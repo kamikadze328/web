@@ -107,7 +107,7 @@ public class PointForPage implements Serializable {
     private Connection getConnection() throws SQLException, ClassNotFoundException {
         final String URL = "jdbc:oracle:thin:@//localhost:1521/orbis";
         final String LOGIN = "s264434";
-        final String PASSWORD = "rvc077";
+        final String PASSWORD = "******";
         Connection con;
         Class.forName("oracle.jdbc.driver.OracleDriver");
         con = DriverManager.getConnection(URL, LOGIN, PASSWORD);
